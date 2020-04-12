@@ -21,11 +21,13 @@ namespace FreemanSaveEditor
         public static IEnumerable<object> CurrentWeapons { get; internal set; }
 
         public static IEnumerable<object> CurrentMisc { get; internal set; }
+        public static IEnumerable<object> CurrentItems { get; internal set; }
 
         public static string CurrentPath { get; internal set; }
         public static Dictionary<string, Localization> LocalizationList { get; internal set; }
         public static List<Soldier> SolderList { get; internal set; }
         public static Hero CurrentHeroes { get; internal set; }
+        public static List<InventoryRow> CurrentInventory { get; internal set; }
 
         /// <summary>
         /// The main entry point for the application.

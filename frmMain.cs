@@ -5,6 +5,7 @@ using QuickType;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -338,6 +339,16 @@ namespace FreemanSaveEditor
                                          i.Cost
                                      });
 
+            Program.CurrentItems = (from i in Program.ItemList
+
+                                    select new
+                                    {
+                                        i.Id,
+                                        i.Name,
+                                        Description = GetDescription(i.Description),
+                                        i.Cost
+                                    });
+
             Program.CurrentMisc = Program.ItemList.Where(x => x.SlotType == SlotType.Misc)
 
                 .Select(x => new
@@ -348,7 +359,17 @@ namespace FreemanSaveEditor
                     x.Cost
                 });
 
+            Program.CurrentInventory = new List<InventoryRow>();
+
+            for (int i = 0; i < Program.CurrentPlayer.Items.Count;)
+            {
+                var newRow = InventoryRow.New(Program.CurrentPlayer.Items, ref i);
+                Program.CurrentInventory.Add(newRow);
+            }
+
             cbSquads.DataSource = Squads;
+            dgvInventory.AutoGenerateColumns = false;
+            dgvInventory.DataSource = Program.CurrentInventory;
             SetPartySize();
         }
 
@@ -682,6 +703,7 @@ namespace FreemanSaveEditor
                     cbSquads.DataSource = Squads;
                     dgvSquadEquips.DataSource = null;
                     dgvSquadStats.DataSource = null;
+                    BtEdit_Click(sender, e);
                 }
         }
 
@@ -704,7 +726,7 @@ namespace FreemanSaveEditor
 
             dgvSquadEquips.DataSource = squad.Soldiers;
             dgvSquadStats.DataSource = squad.Soldiers;
-            SetSquadSize();
+            SetPartySize();
             panSquad.Visible = true;
         }
 
@@ -1342,6 +1364,98 @@ namespace FreemanSaveEditor
             panSquad.Visible = false;
             tabsMain.SelectedIndex = 0;
             tabMenu.SelectedIndex = 0;
+        }
+
+        private void DgvInventory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                if (ModifierKeys == Keys.Shift)
+                {
+                    dgvInventory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
+                }
+                else
+                {
+                    ShowInventorySelection(false, e.RowIndex, e.ColumnIndex);
+                }
+            }
+        }
+
+        private void DgvInventory_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                if (e.Value == null)
+                {
+                    e.Value = "Invalid";
+                    e.FormattingApplied = true;
+                    return;
+                }
+
+                var value = Program.ItemList.Where(x => x.Id.ToString() == e.Value.ToString()).FirstOrDefault();
+
+                if (value != null)
+                {
+                    e.Value = value.Name;
+                    e.CellStyle.BackColor = Color.FromArgb(220, 255, 220);
+                }
+                else
+                {
+                    e.Value = "None";
+                    e.CellStyle.BackColor = Color.White;
+                }
+                e.FormattingApplied = true;
+            }
+        }
+
+        private void MenuAddItem_Click(object sender, EventArgs e)
+        {
+            var amountStr = Interaction.InputBox("Enter amount to insert", "Item Amount To Insert?", "1");
+
+            if (!string.IsNullOrWhiteSpace(amountStr) && int.TryParse(amountStr, out int amount))
+            {
+                if (EmptyInventoryCount() < amount)
+                {
+                    MessageBox.Show($"Not Enough Empty Inventory Space, Only {EmptyInventoryCount()} Spaces Are Empty.");
+                    return;
+                }
+                long newId = ShowInventorySelection(true);
+                if (newId > 0)
+                {
+                    for (int j = 0; j < Program.CurrentInventory.Count; j++)
+                    {
+                        for (int k = 0; k < InventoryRow.ColCount; k++)
+                        {
+                            if (Program.CurrentInventory[j][k] == 0)
+                            {
+                                Program.CurrentInventory[j][k] = newId;
+                                amount--;
+                            }
+                            if (amount == 0)
+                            {
+                                dgvInventory.Refresh();
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private int EmptyInventoryCount()
+        {
+            int emptyCount = 0;
+            foreach (var row in Program.CurrentInventory)
+            {
+                emptyCount += row.EmptyCount;
+            }
+
+            return emptyCount;
+        }
+
+        private void MenuReplace_Click(object sender, EventArgs e)
+        {
+            ShowInventorySelection(false);
         }
     }
 }

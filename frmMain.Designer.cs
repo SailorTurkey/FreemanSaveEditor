@@ -33,6 +33,8 @@ namespace FreemanSaveEditor
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
             this.panelMain = new System.Windows.Forms.Panel();
@@ -260,6 +262,13 @@ namespace FreemanSaveEditor
             this.btRename = new System.Windows.Forms.Button();
             this.label44 = new System.Windows.Forms.Label();
             this.cbSquads = new System.Windows.Forms.ComboBox();
+            this.tabInventory = new System.Windows.Forms.TabPage();
+            this.label48 = new System.Windows.Forms.Label();
+            this.dgvInventory = new System.Windows.Forms.DataGridView();
+            this.colInventory1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInventory2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInventory3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInventory4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btBrowseGame = new System.Windows.Forms.Button();
             this.btBrowseSave = new System.Windows.Forms.Button();
@@ -288,6 +297,10 @@ namespace FreemanSaveEditor
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.selectedSlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReplace = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabs.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -335,12 +348,15 @@ namespace FreemanSaveEditor
             this.tabSquadEquips.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSquadEquips)).BeginInit();
             this.menuSquadEquips.SuspendLayout();
+            this.tabInventory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
             this.tabMenu.SuspendLayout();
             this.tabSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabSaveFile.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.menuInventory.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabs
@@ -348,6 +364,7 @@ namespace FreemanSaveEditor
             this.tabs.Controls.Add(this.tabMain);
             this.tabs.Controls.Add(this.tabEquip);
             this.tabs.Controls.Add(this.tabSquads);
+            this.tabs.Controls.Add(this.tabInventory);
             this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabs.Location = new System.Drawing.Point(3, 37);
             this.tabs.Name = "tabs";
@@ -359,10 +376,10 @@ namespace FreemanSaveEditor
             // tabMain
             // 
             this.tabMain.Controls.Add(this.panelMain);
-            this.tabMain.Location = new System.Drawing.Point(4, 22);
+            this.tabMain.Location = new System.Drawing.Point(4, 25);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(20);
-            this.tabMain.Size = new System.Drawing.Size(1160, 578);
+            this.tabMain.Size = new System.Drawing.Size(1160, 575);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main";
             this.tabMain.UseVisualStyleBackColor = true;
@@ -374,7 +391,7 @@ namespace FreemanSaveEditor
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(20, 20);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1120, 538);
+            this.panelMain.Size = new System.Drawing.Size(1120, 535);
             this.panelMain.TabIndex = 0;
             // 
             // tabsMain
@@ -386,16 +403,16 @@ namespace FreemanSaveEditor
             this.tabsMain.Location = new System.Drawing.Point(0, 0);
             this.tabsMain.Name = "tabsMain";
             this.tabsMain.SelectedIndex = 0;
-            this.tabsMain.Size = new System.Drawing.Size(1120, 538);
+            this.tabsMain.Size = new System.Drawing.Size(1120, 535);
             this.tabsMain.TabIndex = 42;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1112, 512);
+            this.tabPage1.Size = new System.Drawing.Size(1112, 506);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Stats";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -436,7 +453,7 @@ namespace FreemanSaveEditor
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(640, 506);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(640, 500);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // label3
@@ -456,7 +473,7 @@ namespace FreemanSaveEditor
             this.txtCharacterName.Margin = new System.Windows.Forms.Padding(5);
             this.txtCharacterName.MaxLength = 40;
             this.txtCharacterName.Name = "txtCharacterName";
-            this.txtCharacterName.Size = new System.Drawing.Size(118, 20);
+            this.txtCharacterName.Size = new System.Drawing.Size(118, 23);
             this.txtCharacterName.TabIndex = 5;
             // 
             // label12
@@ -475,7 +492,7 @@ namespace FreemanSaveEditor
             this.txtlevel.Location = new System.Drawing.Point(453, 5);
             this.txtlevel.Margin = new System.Windows.Forms.Padding(5);
             this.txtlevel.Name = "txtlevel";
-            this.txtlevel.Size = new System.Drawing.Size(118, 20);
+            this.txtlevel.Size = new System.Drawing.Size(118, 23);
             this.txtlevel.TabIndex = 23;
             this.txtlevel.TextChanged += new System.EventHandler(this.Txtlevel_TextChanged);
             this.txtlevel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
@@ -483,7 +500,7 @@ namespace FreemanSaveEditor
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label10.Location = new System.Drawing.Point(5, 35);
+            this.label10.Location = new System.Drawing.Point(5, 38);
             this.label10.Margin = new System.Windows.Forms.Padding(5);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(150, 20);
@@ -493,17 +510,17 @@ namespace FreemanSaveEditor
             // txtcredits
             // 
             this.txtcredits.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtcredits.Location = new System.Drawing.Point(165, 35);
+            this.txtcredits.Location = new System.Drawing.Point(165, 38);
             this.txtcredits.Margin = new System.Windows.Forms.Padding(5);
             this.txtcredits.Name = "txtcredits";
-            this.txtcredits.Size = new System.Drawing.Size(118, 20);
+            this.txtcredits.Size = new System.Drawing.Size(118, 23);
             this.txtcredits.TabIndex = 19;
             this.txtcredits.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label14
             // 
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label14.Location = new System.Drawing.Point(293, 35);
+            this.label14.Location = new System.Drawing.Point(293, 38);
             this.label14.Margin = new System.Windows.Forms.Padding(5);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(150, 20);
@@ -513,17 +530,17 @@ namespace FreemanSaveEditor
             // txtExp
             // 
             this.txtExp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtExp.Location = new System.Drawing.Point(453, 35);
+            this.txtExp.Location = new System.Drawing.Point(453, 38);
             this.txtExp.Margin = new System.Windows.Forms.Padding(5);
             this.txtExp.MaxLength = 5;
             this.txtExp.Name = "txtExp";
-            this.txtExp.Size = new System.Drawing.Size(118, 20);
+            this.txtExp.Size = new System.Drawing.Size(118, 23);
             this.txtExp.TabIndex = 29;
             // 
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label11.Location = new System.Drawing.Point(5, 65);
+            this.label11.Location = new System.Drawing.Point(5, 71);
             this.label11.Margin = new System.Windows.Forms.Padding(5);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(150, 20);
@@ -533,18 +550,18 @@ namespace FreemanSaveEditor
             // txtrepution
             // 
             this.txtrepution.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtrepution.Location = new System.Drawing.Point(165, 65);
+            this.txtrepution.Location = new System.Drawing.Point(165, 71);
             this.txtrepution.Margin = new System.Windows.Forms.Padding(5);
             this.txtrepution.MaxLength = 5;
             this.txtrepution.Name = "txtrepution";
-            this.txtrepution.Size = new System.Drawing.Size(118, 20);
+            this.txtrepution.Size = new System.Drawing.Size(118, 23);
             this.txtrepution.TabIndex = 21;
             this.txtrepution.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(293, 65);
+            this.label4.Location = new System.Drawing.Point(293, 71);
             this.label4.Margin = new System.Windows.Forms.Padding(5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(150, 20);
@@ -554,18 +571,18 @@ namespace FreemanSaveEditor
             // txtplayerTotalKills
             // 
             this.txtplayerTotalKills.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtplayerTotalKills.Location = new System.Drawing.Point(453, 65);
+            this.txtplayerTotalKills.Location = new System.Drawing.Point(453, 71);
             this.txtplayerTotalKills.Margin = new System.Windows.Forms.Padding(5);
             this.txtplayerTotalKills.MaxLength = 5;
             this.txtplayerTotalKills.Name = "txtplayerTotalKills";
-            this.txtplayerTotalKills.Size = new System.Drawing.Size(118, 20);
+            this.txtplayerTotalKills.Size = new System.Drawing.Size(118, 23);
             this.txtplayerTotalKills.TabIndex = 7;
             this.txtplayerTotalKills.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(5, 95);
+            this.label5.Location = new System.Drawing.Point(5, 104);
             this.label5.Margin = new System.Windows.Forms.Padding(5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(150, 20);
@@ -575,18 +592,18 @@ namespace FreemanSaveEditor
             // txtplayerDeathes
             // 
             this.txtplayerDeathes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtplayerDeathes.Location = new System.Drawing.Point(165, 95);
+            this.txtplayerDeathes.Location = new System.Drawing.Point(165, 104);
             this.txtplayerDeathes.Margin = new System.Windows.Forms.Padding(5);
             this.txtplayerDeathes.MaxLength = 5;
             this.txtplayerDeathes.Name = "txtplayerDeathes";
-            this.txtplayerDeathes.Size = new System.Drawing.Size(118, 20);
+            this.txtplayerDeathes.Size = new System.Drawing.Size(118, 23);
             this.txtplayerDeathes.TabIndex = 9;
             this.txtplayerDeathes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.Location = new System.Drawing.Point(293, 95);
+            this.label6.Location = new System.Drawing.Point(293, 104);
             this.label6.Margin = new System.Windows.Forms.Padding(5);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(150, 20);
@@ -596,18 +613,18 @@ namespace FreemanSaveEditor
             // txtpartyKills
             // 
             this.txtpartyKills.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtpartyKills.Location = new System.Drawing.Point(453, 95);
+            this.txtpartyKills.Location = new System.Drawing.Point(453, 104);
             this.txtpartyKills.Margin = new System.Windows.Forms.Padding(5);
             this.txtpartyKills.MaxLength = 5;
             this.txtpartyKills.Name = "txtpartyKills";
-            this.txtpartyKills.Size = new System.Drawing.Size(118, 20);
+            this.txtpartyKills.Size = new System.Drawing.Size(118, 23);
             this.txtpartyKills.TabIndex = 11;
             this.txtpartyKills.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.Location = new System.Drawing.Point(5, 125);
+            this.label7.Location = new System.Drawing.Point(5, 137);
             this.label7.Margin = new System.Windows.Forms.Padding(5);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(150, 20);
@@ -617,18 +634,18 @@ namespace FreemanSaveEditor
             // txtpartyDeathes
             // 
             this.txtpartyDeathes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtpartyDeathes.Location = new System.Drawing.Point(165, 125);
+            this.txtpartyDeathes.Location = new System.Drawing.Point(165, 137);
             this.txtpartyDeathes.Margin = new System.Windows.Forms.Padding(5);
             this.txtpartyDeathes.MaxLength = 5;
             this.txtpartyDeathes.Name = "txtpartyDeathes";
-            this.txtpartyDeathes.Size = new System.Drawing.Size(118, 20);
+            this.txtpartyDeathes.Size = new System.Drawing.Size(118, 23);
             this.txtpartyDeathes.TabIndex = 13;
             this.txtpartyDeathes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label8.Location = new System.Drawing.Point(293, 125);
+            this.label8.Location = new System.Drawing.Point(293, 137);
             this.label8.Margin = new System.Windows.Forms.Padding(5);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(150, 20);
@@ -638,18 +655,18 @@ namespace FreemanSaveEditor
             // txtbattlesWon
             // 
             this.txtbattlesWon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtbattlesWon.Location = new System.Drawing.Point(453, 125);
+            this.txtbattlesWon.Location = new System.Drawing.Point(453, 137);
             this.txtbattlesWon.Margin = new System.Windows.Forms.Padding(5);
             this.txtbattlesWon.MaxLength = 5;
             this.txtbattlesWon.Name = "txtbattlesWon";
-            this.txtbattlesWon.Size = new System.Drawing.Size(118, 20);
+            this.txtbattlesWon.Size = new System.Drawing.Size(118, 23);
             this.txtbattlesWon.TabIndex = 15;
             this.txtbattlesWon.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label9.Location = new System.Drawing.Point(5, 155);
+            this.label9.Location = new System.Drawing.Point(5, 170);
             this.label9.Margin = new System.Windows.Forms.Padding(5);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(150, 20);
@@ -659,18 +676,18 @@ namespace FreemanSaveEditor
             // txtbattlesLose
             // 
             this.txtbattlesLose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtbattlesLose.Location = new System.Drawing.Point(165, 155);
+            this.txtbattlesLose.Location = new System.Drawing.Point(165, 170);
             this.txtbattlesLose.Margin = new System.Windows.Forms.Padding(5);
             this.txtbattlesLose.MaxLength = 5;
             this.txtbattlesLose.Name = "txtbattlesLose";
-            this.txtbattlesLose.Size = new System.Drawing.Size(118, 20);
+            this.txtbattlesLose.Size = new System.Drawing.Size(118, 23);
             this.txtbattlesLose.TabIndex = 17;
             this.txtbattlesLose.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label13.Location = new System.Drawing.Point(293, 155);
+            this.label13.Location = new System.Drawing.Point(293, 170);
             this.label13.Margin = new System.Windows.Forms.Padding(5);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(150, 20);
@@ -680,18 +697,18 @@ namespace FreemanSaveEditor
             // txtRenownValue
             // 
             this.txtRenownValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtRenownValue.Location = new System.Drawing.Point(453, 155);
+            this.txtRenownValue.Location = new System.Drawing.Point(453, 170);
             this.txtRenownValue.Margin = new System.Windows.Forms.Padding(5);
             this.txtRenownValue.MaxLength = 5;
             this.txtRenownValue.Name = "txtRenownValue";
-            this.txtRenownValue.Size = new System.Drawing.Size(118, 20);
+            this.txtRenownValue.Size = new System.Drawing.Size(118, 23);
             this.txtRenownValue.TabIndex = 25;
             this.txtRenownValue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(5, 185);
+            this.label2.Location = new System.Drawing.Point(5, 203);
             this.label2.Margin = new System.Windows.Forms.Padding(5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(150, 20);
@@ -701,35 +718,35 @@ namespace FreemanSaveEditor
             // txtPositionX
             // 
             this.txtPositionX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtPositionX.Location = new System.Drawing.Point(165, 185);
+            this.txtPositionX.Location = new System.Drawing.Point(165, 203);
             this.txtPositionX.Margin = new System.Windows.Forms.Padding(5);
             this.txtPositionX.Name = "txtPositionX";
-            this.txtPositionX.Size = new System.Drawing.Size(118, 20);
+            this.txtPositionX.Size = new System.Drawing.Size(118, 23);
             this.txtPositionX.TabIndex = 1;
             // 
             // txtPositionY
             // 
             this.txtPositionY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtPositionY.Location = new System.Drawing.Point(293, 185);
+            this.txtPositionY.Location = new System.Drawing.Point(293, 203);
             this.txtPositionY.Margin = new System.Windows.Forms.Padding(5);
             this.txtPositionY.Name = "txtPositionY";
-            this.txtPositionY.Size = new System.Drawing.Size(118, 20);
+            this.txtPositionY.Size = new System.Drawing.Size(118, 23);
             this.txtPositionY.TabIndex = 3;
             // 
             // txtPositionZ
             // 
             this.txtPositionZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtPositionZ.Location = new System.Drawing.Point(421, 185);
+            this.txtPositionZ.Location = new System.Drawing.Point(421, 203);
             this.txtPositionZ.Margin = new System.Windows.Forms.Padding(5);
             this.txtPositionZ.Name = "txtPositionZ";
-            this.txtPositionZ.Size = new System.Drawing.Size(118, 20);
+            this.txtPositionZ.Size = new System.Drawing.Size(118, 23);
             this.txtPositionZ.TabIndex = 2;
             // 
             // label31
             // 
             this.label31.BackColor = System.Drawing.Color.Transparent;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label31.Location = new System.Drawing.Point(3, 210);
+            this.label31.Location = new System.Drawing.Point(3, 231);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(300, 20);
             this.label31.TabIndex = 27;
@@ -750,7 +767,7 @@ namespace FreemanSaveEditor
             this.flowLayoutPanel2.Controls.Add(this.txtagility);
             this.flowLayoutPanel2.Controls.Add(this.label20);
             this.flowLayoutPanel2.Controls.Add(this.txtleadership);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 233);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 254);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(10);
             this.flowLayoutPanel2.Size = new System.Drawing.Size(618, 156);
@@ -773,7 +790,7 @@ namespace FreemanSaveEditor
             this.txtattributePoints.Margin = new System.Windows.Forms.Padding(5);
             this.txtattributePoints.MaxLength = 3;
             this.txtattributePoints.Name = "txtattributePoints";
-            this.txtattributePoints.Size = new System.Drawing.Size(118, 20);
+            this.txtattributePoints.Size = new System.Drawing.Size(118, 23);
             this.txtattributePoints.TabIndex = 28;
             this.txtattributePoints.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
@@ -794,14 +811,14 @@ namespace FreemanSaveEditor
             this.txtconstitution.Margin = new System.Windows.Forms.Padding(5);
             this.txtconstitution.MaxLength = 3;
             this.txtconstitution.Name = "txtconstitution";
-            this.txtconstitution.Size = new System.Drawing.Size(118, 20);
+            this.txtconstitution.Size = new System.Drawing.Size(118, 23);
             this.txtconstitution.TabIndex = 30;
             this.txtconstitution.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label17
             // 
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label17.Location = new System.Drawing.Point(15, 45);
+            this.label17.Location = new System.Drawing.Point(15, 48);
             this.label17.Margin = new System.Windows.Forms.Padding(5);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(150, 20);
@@ -811,18 +828,18 @@ namespace FreemanSaveEditor
             // txtmarksmanship
             // 
             this.txtmarksmanship.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtmarksmanship.Location = new System.Drawing.Point(175, 45);
+            this.txtmarksmanship.Location = new System.Drawing.Point(175, 48);
             this.txtmarksmanship.Margin = new System.Windows.Forms.Padding(5);
             this.txtmarksmanship.MaxLength = 3;
             this.txtmarksmanship.Name = "txtmarksmanship";
-            this.txtmarksmanship.Size = new System.Drawing.Size(118, 20);
+            this.txtmarksmanship.Size = new System.Drawing.Size(118, 23);
             this.txtmarksmanship.TabIndex = 32;
             this.txtmarksmanship.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label18
             // 
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label18.Location = new System.Drawing.Point(303, 45);
+            this.label18.Location = new System.Drawing.Point(303, 48);
             this.label18.Margin = new System.Windows.Forms.Padding(5);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(150, 20);
@@ -832,18 +849,18 @@ namespace FreemanSaveEditor
             // txtintelligence
             // 
             this.txtintelligence.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtintelligence.Location = new System.Drawing.Point(463, 45);
+            this.txtintelligence.Location = new System.Drawing.Point(463, 48);
             this.txtintelligence.Margin = new System.Windows.Forms.Padding(5);
             this.txtintelligence.MaxLength = 3;
             this.txtintelligence.Name = "txtintelligence";
-            this.txtintelligence.Size = new System.Drawing.Size(118, 20);
+            this.txtintelligence.Size = new System.Drawing.Size(118, 23);
             this.txtintelligence.TabIndex = 34;
             this.txtintelligence.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label19
             // 
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label19.Location = new System.Drawing.Point(15, 75);
+            this.label19.Location = new System.Drawing.Point(15, 81);
             this.label19.Margin = new System.Windows.Forms.Padding(5);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(150, 20);
@@ -853,18 +870,18 @@ namespace FreemanSaveEditor
             // txtagility
             // 
             this.txtagility.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtagility.Location = new System.Drawing.Point(175, 75);
+            this.txtagility.Location = new System.Drawing.Point(175, 81);
             this.txtagility.Margin = new System.Windows.Forms.Padding(5);
             this.txtagility.MaxLength = 3;
             this.txtagility.Name = "txtagility";
-            this.txtagility.Size = new System.Drawing.Size(118, 20);
+            this.txtagility.Size = new System.Drawing.Size(118, 23);
             this.txtagility.TabIndex = 36;
             this.txtagility.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label20
             // 
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label20.Location = new System.Drawing.Point(303, 75);
+            this.label20.Location = new System.Drawing.Point(303, 81);
             this.label20.Margin = new System.Windows.Forms.Padding(5);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(150, 20);
@@ -874,11 +891,11 @@ namespace FreemanSaveEditor
             // txtleadership
             // 
             this.txtleadership.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtleadership.Location = new System.Drawing.Point(463, 75);
+            this.txtleadership.Location = new System.Drawing.Point(463, 81);
             this.txtleadership.Margin = new System.Windows.Forms.Padding(5);
             this.txtleadership.MaxLength = 3;
             this.txtleadership.Name = "txtleadership";
-            this.txtleadership.Size = new System.Drawing.Size(118, 20);
+            this.txtleadership.Size = new System.Drawing.Size(118, 23);
             this.txtleadership.TabIndex = 38;
             this.txtleadership.TextChanged += new System.EventHandler(this.Txtleadership_TextChanged);
             this.txtleadership.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
@@ -887,10 +904,10 @@ namespace FreemanSaveEditor
             // 
             this.tabPage2.Controls.Add(this.btSetMaxSkill);
             this.tabPage2.Controls.Add(this.flowLayoutPanel4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1112, 512);
+            this.tabPage2.Size = new System.Drawing.Size(1112, 506);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Skill Points";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -937,7 +954,7 @@ namespace FreemanSaveEditor
             this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(312, 506);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(312, 500);
             this.flowLayoutPanel4.TabIndex = 40;
             // 
             // label25
@@ -957,13 +974,13 @@ namespace FreemanSaveEditor
             this.txtplayerPoints.Margin = new System.Windows.Forms.Padding(5);
             this.txtplayerPoints.MaxLength = 3;
             this.txtplayerPoints.Name = "txtplayerPoints";
-            this.txtplayerPoints.Size = new System.Drawing.Size(118, 20);
+            this.txtplayerPoints.Size = new System.Drawing.Size(118, 23);
             this.txtplayerPoints.TabIndex = 48;
             // 
             // label32
             // 
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label32.Location = new System.Drawing.Point(5, 35);
+            this.label32.Location = new System.Drawing.Point(5, 38);
             this.label32.Margin = new System.Windows.Forms.Padding(5);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(150, 20);
@@ -973,17 +990,17 @@ namespace FreemanSaveEditor
             // txtcommanding
             // 
             this.txtcommanding.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtcommanding.Location = new System.Drawing.Point(165, 35);
+            this.txtcommanding.Location = new System.Drawing.Point(165, 38);
             this.txtcommanding.Margin = new System.Windows.Forms.Padding(5);
             this.txtcommanding.MaxLength = 3;
             this.txtcommanding.Name = "txtcommanding";
-            this.txtcommanding.Size = new System.Drawing.Size(118, 20);
+            this.txtcommanding.Size = new System.Drawing.Size(118, 23);
             this.txtcommanding.TabIndex = 25;
             // 
             // label33
             // 
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label33.Location = new System.Drawing.Point(5, 65);
+            this.label33.Location = new System.Drawing.Point(5, 71);
             this.label33.Margin = new System.Windows.Forms.Padding(5);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(150, 20);
@@ -993,17 +1010,17 @@ namespace FreemanSaveEditor
             // txtprisonermanagement
             // 
             this.txtprisonermanagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtprisonermanagement.Location = new System.Drawing.Point(165, 65);
+            this.txtprisonermanagement.Location = new System.Drawing.Point(165, 71);
             this.txtprisonermanagement.Margin = new System.Windows.Forms.Padding(5);
             this.txtprisonermanagement.MaxLength = 3;
             this.txtprisonermanagement.Name = "txtprisonermanagement";
-            this.txtprisonermanagement.Size = new System.Drawing.Size(118, 20);
+            this.txtprisonermanagement.Size = new System.Drawing.Size(118, 23);
             this.txtprisonermanagement.TabIndex = 28;
             // 
             // label34
             // 
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label34.Location = new System.Drawing.Point(5, 95);
+            this.label34.Location = new System.Drawing.Point(5, 104);
             this.label34.Margin = new System.Windows.Forms.Padding(5);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(150, 20);
@@ -1013,17 +1030,17 @@ namespace FreemanSaveEditor
             // txttraining
             // 
             this.txttraining.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txttraining.Location = new System.Drawing.Point(165, 95);
+            this.txttraining.Location = new System.Drawing.Point(165, 104);
             this.txttraining.Margin = new System.Windows.Forms.Padding(5);
             this.txttraining.MaxLength = 3;
             this.txttraining.Name = "txttraining";
-            this.txttraining.Size = new System.Drawing.Size(118, 20);
+            this.txttraining.Size = new System.Drawing.Size(118, 23);
             this.txttraining.TabIndex = 30;
             // 
             // label35
             // 
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label35.Location = new System.Drawing.Point(5, 125);
+            this.label35.Location = new System.Drawing.Point(5, 137);
             this.label35.Margin = new System.Windows.Forms.Padding(5);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(150, 20);
@@ -1033,17 +1050,17 @@ namespace FreemanSaveEditor
             // txtinventorymanagement
             // 
             this.txtinventorymanagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtinventorymanagement.Location = new System.Drawing.Point(165, 125);
+            this.txtinventorymanagement.Location = new System.Drawing.Point(165, 137);
             this.txtinventorymanagement.Margin = new System.Windows.Forms.Padding(5);
             this.txtinventorymanagement.MaxLength = 3;
             this.txtinventorymanagement.Name = "txtinventorymanagement";
-            this.txtinventorymanagement.Size = new System.Drawing.Size(118, 20);
+            this.txtinventorymanagement.Size = new System.Drawing.Size(118, 23);
             this.txtinventorymanagement.TabIndex = 32;
             // 
             // label36
             // 
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label36.Location = new System.Drawing.Point(5, 155);
+            this.label36.Location = new System.Drawing.Point(5, 170);
             this.label36.Margin = new System.Windows.Forms.Padding(5);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(150, 20);
@@ -1053,17 +1070,17 @@ namespace FreemanSaveEditor
             // txtnavigation
             // 
             this.txtnavigation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtnavigation.Location = new System.Drawing.Point(165, 155);
+            this.txtnavigation.Location = new System.Drawing.Point(165, 170);
             this.txtnavigation.Margin = new System.Windows.Forms.Padding(5);
             this.txtnavigation.MaxLength = 3;
             this.txtnavigation.Name = "txtnavigation";
-            this.txtnavigation.Size = new System.Drawing.Size(118, 20);
+            this.txtnavigation.Size = new System.Drawing.Size(118, 23);
             this.txtnavigation.TabIndex = 34;
             // 
             // label37
             // 
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label37.Location = new System.Drawing.Point(5, 185);
+            this.label37.Location = new System.Drawing.Point(5, 203);
             this.label37.Margin = new System.Windows.Forms.Padding(5);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(150, 20);
@@ -1073,17 +1090,17 @@ namespace FreemanSaveEditor
             // txtlooting
             // 
             this.txtlooting.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtlooting.Location = new System.Drawing.Point(165, 185);
+            this.txtlooting.Location = new System.Drawing.Point(165, 203);
             this.txtlooting.Margin = new System.Windows.Forms.Padding(5);
             this.txtlooting.MaxLength = 3;
             this.txtlooting.Name = "txtlooting";
-            this.txtlooting.Size = new System.Drawing.Size(118, 20);
+            this.txtlooting.Size = new System.Drawing.Size(118, 23);
             this.txtlooting.TabIndex = 36;
             // 
             // label38
             // 
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label38.Location = new System.Drawing.Point(5, 215);
+            this.label38.Location = new System.Drawing.Point(5, 236);
             this.label38.Margin = new System.Windows.Forms.Padding(5);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(150, 20);
@@ -1093,17 +1110,17 @@ namespace FreemanSaveEditor
             // txtmedical
             // 
             this.txtmedical.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtmedical.Location = new System.Drawing.Point(165, 215);
+            this.txtmedical.Location = new System.Drawing.Point(165, 236);
             this.txtmedical.Margin = new System.Windows.Forms.Padding(5);
             this.txtmedical.MaxLength = 3;
             this.txtmedical.Name = "txtmedical";
-            this.txtmedical.Size = new System.Drawing.Size(118, 20);
+            this.txtmedical.Size = new System.Drawing.Size(118, 23);
             this.txtmedical.TabIndex = 38;
             // 
             // label39
             // 
             this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label39.Location = new System.Drawing.Point(5, 245);
+            this.label39.Location = new System.Drawing.Point(5, 269);
             this.label39.Margin = new System.Windows.Forms.Padding(5);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(150, 20);
@@ -1113,17 +1130,17 @@ namespace FreemanSaveEditor
             // txtfirstaid
             // 
             this.txtfirstaid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtfirstaid.Location = new System.Drawing.Point(165, 245);
+            this.txtfirstaid.Location = new System.Drawing.Point(165, 269);
             this.txtfirstaid.Margin = new System.Windows.Forms.Padding(5);
             this.txtfirstaid.MaxLength = 3;
             this.txtfirstaid.Name = "txtfirstaid";
-            this.txtfirstaid.Size = new System.Drawing.Size(118, 20);
+            this.txtfirstaid.Size = new System.Drawing.Size(118, 23);
             this.txtfirstaid.TabIndex = 40;
             // 
             // label40
             // 
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label40.Location = new System.Drawing.Point(5, 275);
+            this.label40.Location = new System.Drawing.Point(5, 302);
             this.label40.Margin = new System.Windows.Forms.Padding(5);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(150, 20);
@@ -1133,17 +1150,17 @@ namespace FreemanSaveEditor
             // txttrading
             // 
             this.txttrading.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txttrading.Location = new System.Drawing.Point(165, 275);
+            this.txttrading.Location = new System.Drawing.Point(165, 302);
             this.txttrading.Margin = new System.Windows.Forms.Padding(5);
             this.txttrading.MaxLength = 3;
             this.txttrading.Name = "txttrading";
-            this.txttrading.Size = new System.Drawing.Size(118, 20);
+            this.txttrading.Size = new System.Drawing.Size(118, 23);
             this.txttrading.TabIndex = 42;
             // 
             // label41
             // 
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label41.Location = new System.Drawing.Point(5, 305);
+            this.label41.Location = new System.Drawing.Point(5, 335);
             this.label41.Margin = new System.Windows.Forms.Padding(5);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(150, 20);
@@ -1153,17 +1170,17 @@ namespace FreemanSaveEditor
             // txtdiplomacy
             // 
             this.txtdiplomacy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtdiplomacy.Location = new System.Drawing.Point(165, 305);
+            this.txtdiplomacy.Location = new System.Drawing.Point(165, 335);
             this.txtdiplomacy.Margin = new System.Windows.Forms.Padding(5);
             this.txtdiplomacy.MaxLength = 3;
             this.txtdiplomacy.Name = "txtdiplomacy";
-            this.txtdiplomacy.Size = new System.Drawing.Size(118, 20);
+            this.txtdiplomacy.Size = new System.Drawing.Size(118, 23);
             this.txtdiplomacy.TabIndex = 44;
             // 
             // label42
             // 
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label42.Location = new System.Drawing.Point(5, 335);
+            this.label42.Location = new System.Drawing.Point(5, 368);
             this.label42.Margin = new System.Windows.Forms.Padding(5);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(150, 20);
@@ -1173,21 +1190,21 @@ namespace FreemanSaveEditor
             // txtstealing
             // 
             this.txtstealing.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtstealing.Location = new System.Drawing.Point(165, 335);
+            this.txtstealing.Location = new System.Drawing.Point(165, 368);
             this.txtstealing.Margin = new System.Windows.Forms.Padding(5);
             this.txtstealing.MaxLength = 3;
             this.txtstealing.Name = "txtstealing";
-            this.txtstealing.Size = new System.Drawing.Size(118, 20);
+            this.txtstealing.Size = new System.Drawing.Size(118, 23);
             this.txtstealing.TabIndex = 46;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btSetWeaponMax);
             this.tabPage3.Controls.Add(this.flowLayoutPanel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1112, 512);
+            this.tabPage3.Size = new System.Drawing.Size(1112, 506);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Weapon Points";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1230,7 +1247,7 @@ namespace FreemanSaveEditor
             this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(312, 506);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(312, 500);
             this.flowLayoutPanel3.TabIndex = 39;
             // 
             // label46
@@ -1250,13 +1267,13 @@ namespace FreemanSaveEditor
             this.txtweaponPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtweaponPoint.MaxLength = 3;
             this.txtweaponPoint.Name = "txtweaponPoint";
-            this.txtweaponPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtweaponPoint.Size = new System.Drawing.Size(118, 23);
             this.txtweaponPoint.TabIndex = 44;
             // 
             // label21
             // 
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label21.Location = new System.Drawing.Point(5, 35);
+            this.label21.Location = new System.Drawing.Point(5, 38);
             this.label21.Margin = new System.Windows.Forms.Padding(5);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(150, 20);
@@ -1266,18 +1283,18 @@ namespace FreemanSaveEditor
             // txtarmorPoint
             // 
             this.txtarmorPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtarmorPoint.Location = new System.Drawing.Point(165, 35);
+            this.txtarmorPoint.Location = new System.Drawing.Point(165, 38);
             this.txtarmorPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtarmorPoint.MaxLength = 3;
             this.txtarmorPoint.Name = "txtarmorPoint";
-            this.txtarmorPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtarmorPoint.Size = new System.Drawing.Size(118, 23);
             this.txtarmorPoint.TabIndex = 25;
             this.txtarmorPoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label22
             // 
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label22.Location = new System.Drawing.Point(5, 65);
+            this.label22.Location = new System.Drawing.Point(5, 71);
             this.label22.Margin = new System.Windows.Forms.Padding(5);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(150, 20);
@@ -1287,18 +1304,18 @@ namespace FreemanSaveEditor
             // txtpistolPoint
             // 
             this.txtpistolPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtpistolPoint.Location = new System.Drawing.Point(165, 65);
+            this.txtpistolPoint.Location = new System.Drawing.Point(165, 71);
             this.txtpistolPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtpistolPoint.MaxLength = 3;
             this.txtpistolPoint.Name = "txtpistolPoint";
-            this.txtpistolPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtpistolPoint.Size = new System.Drawing.Size(118, 23);
             this.txtpistolPoint.TabIndex = 28;
             this.txtpistolPoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label23
             // 
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label23.Location = new System.Drawing.Point(5, 95);
+            this.label23.Location = new System.Drawing.Point(5, 104);
             this.label23.Margin = new System.Windows.Forms.Padding(5);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(150, 20);
@@ -1308,18 +1325,18 @@ namespace FreemanSaveEditor
             // txtSmgPoint
             // 
             this.txtSmgPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtSmgPoint.Location = new System.Drawing.Point(165, 95);
+            this.txtSmgPoint.Location = new System.Drawing.Point(165, 104);
             this.txtSmgPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtSmgPoint.MaxLength = 3;
             this.txtSmgPoint.Name = "txtSmgPoint";
-            this.txtSmgPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtSmgPoint.Size = new System.Drawing.Size(118, 23);
             this.txtSmgPoint.TabIndex = 30;
             this.txtSmgPoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label24
             // 
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label24.Location = new System.Drawing.Point(5, 125);
+            this.label24.Location = new System.Drawing.Point(5, 137);
             this.label24.Margin = new System.Windows.Forms.Padding(5);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(150, 20);
@@ -1329,18 +1346,18 @@ namespace FreemanSaveEditor
             // txtshotGunPoint
             // 
             this.txtshotGunPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtshotGunPoint.Location = new System.Drawing.Point(165, 125);
+            this.txtshotGunPoint.Location = new System.Drawing.Point(165, 137);
             this.txtshotGunPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtshotGunPoint.MaxLength = 3;
             this.txtshotGunPoint.Name = "txtshotGunPoint";
-            this.txtshotGunPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtshotGunPoint.Size = new System.Drawing.Size(118, 23);
             this.txtshotGunPoint.TabIndex = 32;
             this.txtshotGunPoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label26
             // 
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label26.Location = new System.Drawing.Point(5, 155);
+            this.label26.Location = new System.Drawing.Point(5, 170);
             this.label26.Margin = new System.Windows.Forms.Padding(5);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(150, 20);
@@ -1350,18 +1367,18 @@ namespace FreemanSaveEditor
             // txtriflePoint
             // 
             this.txtriflePoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtriflePoint.Location = new System.Drawing.Point(165, 155);
+            this.txtriflePoint.Location = new System.Drawing.Point(165, 170);
             this.txtriflePoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtriflePoint.MaxLength = 3;
             this.txtriflePoint.Name = "txtriflePoint";
-            this.txtriflePoint.Size = new System.Drawing.Size(118, 20);
+            this.txtriflePoint.Size = new System.Drawing.Size(118, 23);
             this.txtriflePoint.TabIndex = 34;
             this.txtriflePoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label27
             // 
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label27.Location = new System.Drawing.Point(5, 185);
+            this.label27.Location = new System.Drawing.Point(5, 203);
             this.label27.Margin = new System.Windows.Forms.Padding(5);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(150, 20);
@@ -1371,18 +1388,18 @@ namespace FreemanSaveEditor
             // txtassaultRiflePoint
             // 
             this.txtassaultRiflePoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtassaultRiflePoint.Location = new System.Drawing.Point(165, 185);
+            this.txtassaultRiflePoint.Location = new System.Drawing.Point(165, 203);
             this.txtassaultRiflePoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtassaultRiflePoint.MaxLength = 3;
             this.txtassaultRiflePoint.Name = "txtassaultRiflePoint";
-            this.txtassaultRiflePoint.Size = new System.Drawing.Size(118, 20);
+            this.txtassaultRiflePoint.Size = new System.Drawing.Size(118, 23);
             this.txtassaultRiflePoint.TabIndex = 36;
             this.txtassaultRiflePoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label28
             // 
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label28.Location = new System.Drawing.Point(5, 215);
+            this.label28.Location = new System.Drawing.Point(5, 236);
             this.label28.Margin = new System.Windows.Forms.Padding(5);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(150, 20);
@@ -1392,18 +1409,18 @@ namespace FreemanSaveEditor
             // txtmachineGunPoint
             // 
             this.txtmachineGunPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtmachineGunPoint.Location = new System.Drawing.Point(165, 215);
+            this.txtmachineGunPoint.Location = new System.Drawing.Point(165, 236);
             this.txtmachineGunPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtmachineGunPoint.MaxLength = 3;
             this.txtmachineGunPoint.Name = "txtmachineGunPoint";
-            this.txtmachineGunPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtmachineGunPoint.Size = new System.Drawing.Size(118, 23);
             this.txtmachineGunPoint.TabIndex = 38;
             this.txtmachineGunPoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label29
             // 
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label29.Location = new System.Drawing.Point(5, 245);
+            this.label29.Location = new System.Drawing.Point(5, 269);
             this.label29.Margin = new System.Windows.Forms.Padding(5);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(150, 20);
@@ -1413,18 +1430,18 @@ namespace FreemanSaveEditor
             // txtlauncherPoint
             // 
             this.txtlauncherPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtlauncherPoint.Location = new System.Drawing.Point(165, 245);
+            this.txtlauncherPoint.Location = new System.Drawing.Point(165, 269);
             this.txtlauncherPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtlauncherPoint.MaxLength = 3;
             this.txtlauncherPoint.Name = "txtlauncherPoint";
-            this.txtlauncherPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtlauncherPoint.Size = new System.Drawing.Size(118, 23);
             this.txtlauncherPoint.TabIndex = 40;
             this.txtlauncherPoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
             // label30
             // 
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label30.Location = new System.Drawing.Point(5, 275);
+            this.label30.Location = new System.Drawing.Point(5, 302);
             this.label30.Margin = new System.Windows.Forms.Padding(5);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(150, 20);
@@ -1434,11 +1451,11 @@ namespace FreemanSaveEditor
             // txtthrowingPoint
             // 
             this.txtthrowingPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtthrowingPoint.Location = new System.Drawing.Point(165, 275);
+            this.txtthrowingPoint.Location = new System.Drawing.Point(165, 302);
             this.txtthrowingPoint.Margin = new System.Windows.Forms.Padding(5);
             this.txtthrowingPoint.MaxLength = 3;
             this.txtthrowingPoint.Name = "txtthrowingPoint";
-            this.txtthrowingPoint.Size = new System.Drawing.Size(118, 20);
+            this.txtthrowingPoint.Size = new System.Drawing.Size(118, 23);
             this.txtthrowingPoint.TabIndex = 42;
             this.txtthrowingPoint.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNumeric_KeyDown_Check);
             // 
@@ -1495,10 +1512,10 @@ namespace FreemanSaveEditor
             this.tabEquip.Controls.Add(this.label43);
             this.tabEquip.Controls.Add(this.lbHELMET);
             this.tabEquip.Controls.Add(this.picHelmet);
-            this.tabEquip.Location = new System.Drawing.Point(4, 22);
+            this.tabEquip.Location = new System.Drawing.Point(4, 25);
             this.tabEquip.Name = "tabEquip";
             this.tabEquip.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEquip.Size = new System.Drawing.Size(1160, 578);
+            this.tabEquip.Size = new System.Drawing.Size(1160, 575);
             this.tabEquip.TabIndex = 1;
             this.tabEquip.Text = "Equipment";
             this.tabEquip.UseVisualStyleBackColor = true;
@@ -1510,7 +1527,7 @@ namespace FreemanSaveEditor
             this.lbWep2Acc2.ForeColor = System.Drawing.Color.Black;
             this.lbWep2Acc2.Location = new System.Drawing.Point(594, 449);
             this.lbWep2Acc2.Name = "lbWep2Acc2";
-            this.lbWep2Acc2.Size = new System.Drawing.Size(42, 17);
+            this.lbWep2Acc2.Size = new System.Drawing.Size(48, 20);
             this.lbWep2Acc2.TabIndex = 50;
             this.lbWep2Acc2.Text = "None";
             // 
@@ -1521,7 +1538,7 @@ namespace FreemanSaveEditor
             this.lbWep2Acc1.ForeColor = System.Drawing.Color.Black;
             this.lbWep2Acc1.Location = new System.Drawing.Point(594, 382);
             this.lbWep2Acc1.Name = "lbWep2Acc1";
-            this.lbWep2Acc1.Size = new System.Drawing.Size(42, 17);
+            this.lbWep2Acc1.Size = new System.Drawing.Size(48, 20);
             this.lbWep2Acc1.TabIndex = 49;
             this.lbWep2Acc1.Text = "None";
             // 
@@ -1532,7 +1549,7 @@ namespace FreemanSaveEditor
             this.lbWep2.ForeColor = System.Drawing.Color.Black;
             this.lbWep2.Location = new System.Drawing.Point(594, 315);
             this.lbWep2.Name = "lbWep2";
-            this.lbWep2.Size = new System.Drawing.Size(42, 17);
+            this.lbWep2.Size = new System.Drawing.Size(48, 20);
             this.lbWep2.TabIndex = 48;
             this.lbWep2.Text = "None";
             // 
@@ -1543,7 +1560,7 @@ namespace FreemanSaveEditor
             this.lbWepAcc2.ForeColor = System.Drawing.Color.Black;
             this.lbWepAcc2.Location = new System.Drawing.Point(594, 248);
             this.lbWepAcc2.Name = "lbWepAcc2";
-            this.lbWepAcc2.Size = new System.Drawing.Size(42, 17);
+            this.lbWepAcc2.Size = new System.Drawing.Size(48, 20);
             this.lbWepAcc2.TabIndex = 47;
             this.lbWepAcc2.Text = "None";
             // 
@@ -1554,7 +1571,7 @@ namespace FreemanSaveEditor
             this.lbWepAcc1.ForeColor = System.Drawing.Color.Black;
             this.lbWepAcc1.Location = new System.Drawing.Point(594, 181);
             this.lbWepAcc1.Name = "lbWepAcc1";
-            this.lbWepAcc1.Size = new System.Drawing.Size(42, 17);
+            this.lbWepAcc1.Size = new System.Drawing.Size(48, 20);
             this.lbWepAcc1.TabIndex = 46;
             this.lbWepAcc1.Text = "None";
             // 
@@ -1807,7 +1824,7 @@ namespace FreemanSaveEditor
             this.lbWep1.ForeColor = System.Drawing.Color.Black;
             this.lbWep1.Location = new System.Drawing.Point(594, 114);
             this.lbWep1.Name = "lbWep1";
-            this.lbWep1.Size = new System.Drawing.Size(42, 17);
+            this.lbWep1.Size = new System.Drawing.Size(48, 20);
             this.lbWep1.TabIndex = 23;
             this.lbWep1.Text = "None";
             // 
@@ -1906,7 +1923,7 @@ namespace FreemanSaveEditor
             this.lbPistolAcc.ForeColor = System.Drawing.Color.Black;
             this.lbPistolAcc.Location = new System.Drawing.Point(120, 496);
             this.lbPistolAcc.Name = "lbPistolAcc";
-            this.lbPistolAcc.Size = new System.Drawing.Size(42, 17);
+            this.lbPistolAcc.Size = new System.Drawing.Size(48, 20);
             this.lbPistolAcc.TabIndex = 14;
             this.lbPistolAcc.Text = "None";
             // 
@@ -1917,7 +1934,7 @@ namespace FreemanSaveEditor
             this.lbClothes.ForeColor = System.Drawing.Color.Black;
             this.lbClothes.Location = new System.Drawing.Point(120, 228);
             this.lbClothes.Name = "lbClothes";
-            this.lbClothes.Size = new System.Drawing.Size(42, 17);
+            this.lbClothes.Size = new System.Drawing.Size(48, 20);
             this.lbClothes.TabIndex = 13;
             this.lbClothes.Text = "None";
             // 
@@ -1928,7 +1945,7 @@ namespace FreemanSaveEditor
             this.lbArmor.ForeColor = System.Drawing.Color.Black;
             this.lbArmor.Location = new System.Drawing.Point(120, 295);
             this.lbArmor.Name = "lbArmor";
-            this.lbArmor.Size = new System.Drawing.Size(42, 17);
+            this.lbArmor.Size = new System.Drawing.Size(48, 20);
             this.lbArmor.TabIndex = 12;
             this.lbArmor.Text = "None";
             // 
@@ -1939,7 +1956,7 @@ namespace FreemanSaveEditor
             this.lbPants.ForeColor = System.Drawing.Color.Black;
             this.lbPants.Location = new System.Drawing.Point(120, 362);
             this.lbPants.Name = "lbPants";
-            this.lbPants.Size = new System.Drawing.Size(42, 17);
+            this.lbPants.Size = new System.Drawing.Size(48, 20);
             this.lbPants.TabIndex = 11;
             this.lbPants.Text = "None";
             // 
@@ -1950,7 +1967,7 @@ namespace FreemanSaveEditor
             this.lbPistol.ForeColor = System.Drawing.Color.Black;
             this.lbPistol.Location = new System.Drawing.Point(120, 429);
             this.lbPistol.Name = "lbPistol";
-            this.lbPistol.Size = new System.Drawing.Size(42, 17);
+            this.lbPistol.Size = new System.Drawing.Size(48, 20);
             this.lbPistol.TabIndex = 10;
             this.lbPistol.Text = "None";
             // 
@@ -1961,7 +1978,7 @@ namespace FreemanSaveEditor
             this.lbMask.ForeColor = System.Drawing.Color.Black;
             this.lbMask.Location = new System.Drawing.Point(120, 161);
             this.lbMask.Name = "lbMask";
-            this.lbMask.Size = new System.Drawing.Size(42, 17);
+            this.lbMask.Size = new System.Drawing.Size(48, 20);
             this.lbMask.TabIndex = 9;
             this.lbMask.Text = "None";
             // 
@@ -2038,7 +2055,7 @@ namespace FreemanSaveEditor
             this.label43.ForeColor = System.Drawing.Color.DarkGreen;
             this.label43.Location = new System.Drawing.Point(266, 49);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(510, 17);
+            this.label43.Size = new System.Drawing.Size(601, 20);
             this.label43.TabIndex = 2;
             this.label43.Text = "Double Click Images To Set Values, Pistol Ammo Is Set Automagically";
             // 
@@ -2049,7 +2066,7 @@ namespace FreemanSaveEditor
             this.lbHELMET.ForeColor = System.Drawing.Color.Black;
             this.lbHELMET.Location = new System.Drawing.Point(120, 94);
             this.lbHELMET.Name = "lbHELMET";
-            this.lbHELMET.Size = new System.Drawing.Size(42, 17);
+            this.lbHELMET.Size = new System.Drawing.Size(48, 20);
             this.lbHELMET.TabIndex = 1;
             this.lbHELMET.Text = "None";
             // 
@@ -2077,9 +2094,9 @@ namespace FreemanSaveEditor
             this.tabSquads.Controls.Add(this.btRename);
             this.tabSquads.Controls.Add(this.label44);
             this.tabSquads.Controls.Add(this.cbSquads);
-            this.tabSquads.Location = new System.Drawing.Point(4, 22);
+            this.tabSquads.Location = new System.Drawing.Point(4, 25);
             this.tabSquads.Name = "tabSquads";
-            this.tabSquads.Size = new System.Drawing.Size(1160, 578);
+            this.tabSquads.Size = new System.Drawing.Size(1160, 575);
             this.tabSquads.TabIndex = 2;
             this.tabSquads.Text = "Party";
             this.tabSquads.UseVisualStyleBackColor = true;
@@ -2123,7 +2140,7 @@ namespace FreemanSaveEditor
             this.label47.ForeColor = System.Drawing.Color.DarkGreen;
             this.label47.Location = new System.Drawing.Point(39, 74);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(572, 15);
+            this.label47.Size = new System.Drawing.Size(693, 18);
             this.label47.TabIndex = 15;
             this.label47.Text = "Replacing A Unit, Resets It\'s Stats, You Can Manually Give Them Exp To Level Them" +
     " Up In-Game Again.";
@@ -2137,7 +2154,7 @@ namespace FreemanSaveEditor
             this.panSquad.Controls.Add(this.btEditSoldier);
             this.panSquad.Controls.Add(this.tabsSquadDetails);
             this.panSquad.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panSquad.Location = new System.Drawing.Point(0, 232);
+            this.panSquad.Location = new System.Drawing.Point(0, 229);
             this.panSquad.Name = "panSquad";
             this.panSquad.Size = new System.Drawing.Size(1160, 346);
             this.panSquad.TabIndex = 14;
@@ -2150,7 +2167,7 @@ namespace FreemanSaveEditor
             this.lbSquadSize.ForeColor = System.Drawing.Color.DarkGreen;
             this.lbSquadSize.Location = new System.Drawing.Point(4, 7);
             this.lbSquadSize.Name = "lbSquadSize";
-            this.lbSquadSize.Size = new System.Drawing.Size(76, 15);
+            this.lbSquadSize.Size = new System.Drawing.Size(91, 18);
             this.lbSquadSize.TabIndex = 14;
             this.lbSquadSize.Text = "Squad Size: ";
             // 
@@ -2208,10 +2225,10 @@ namespace FreemanSaveEditor
             // tabSquadStats
             // 
             this.tabSquadStats.Controls.Add(this.dgvSquadStats);
-            this.tabSquadStats.Location = new System.Drawing.Point(4, 22);
+            this.tabSquadStats.Location = new System.Drawing.Point(4, 25);
             this.tabSquadStats.Name = "tabSquadStats";
             this.tabSquadStats.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSquadStats.Size = new System.Drawing.Size(1152, 295);
+            this.tabSquadStats.Size = new System.Drawing.Size(1152, 292);
             this.tabSquadStats.TabIndex = 0;
             this.tabSquadStats.Text = "Stats";
             this.tabSquadStats.UseVisualStyleBackColor = true;
@@ -2250,7 +2267,7 @@ namespace FreemanSaveEditor
             this.dgvSquadStats.RowHeadersVisible = false;
             this.dgvSquadStats.RowHeadersWidth = 51;
             this.dgvSquadStats.RowTemplate.Height = 24;
-            this.dgvSquadStats.Size = new System.Drawing.Size(1146, 289);
+            this.dgvSquadStats.Size = new System.Drawing.Size(1146, 286);
             this.dgvSquadStats.TabIndex = 8;
             this.dgvSquadStats.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvSquadStats_CellMouseDown);
             this.dgvSquadStats.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvSquadStats_CellValidating);
@@ -2262,7 +2279,7 @@ namespace FreemanSaveEditor
             this.colIsHero.MinimumWidth = 6;
             this.colIsHero.Name = "colIsHero";
             this.colIsHero.ReadOnly = true;
-            this.colIsHero.Width = 44;
+            this.colIsHero.Width = 55;
             // 
             // colName
             // 
@@ -2280,7 +2297,7 @@ namespace FreemanSaveEditor
             this.colSex.MinimumWidth = 6;
             this.colSex.Name = "colSex";
             this.colSex.ReadOnly = true;
-            this.colSex.Width = 50;
+            this.colSex.Width = 60;
             // 
             // colExp
             // 
@@ -2288,7 +2305,7 @@ namespace FreemanSaveEditor
             this.colExp.HeaderText = "Exp";
             this.colExp.MinimumWidth = 6;
             this.colExp.Name = "colExp";
-            this.colExp.Width = 50;
+            this.colExp.Width = 60;
             // 
             // colLevel
             // 
@@ -2296,7 +2313,7 @@ namespace FreemanSaveEditor
             this.colLevel.HeaderText = "Level";
             this.colLevel.MinimumWidth = 6;
             this.colLevel.Name = "colLevel";
-            this.colLevel.Width = 58;
+            this.colLevel.Width = 71;
             // 
             // colMorale
             // 
@@ -2304,7 +2321,7 @@ namespace FreemanSaveEditor
             this.colMorale.HeaderText = "Morale";
             this.colMorale.MinimumWidth = 6;
             this.colMorale.Name = "colMorale";
-            this.colMorale.Width = 64;
+            this.colMorale.Width = 80;
             // 
             // colSightBonus
             // 
@@ -2312,7 +2329,7 @@ namespace FreemanSaveEditor
             this.colSightBonus.HeaderText = "SightBonus";
             this.colSightBonus.MinimumWidth = 6;
             this.colSightBonus.Name = "colSightBonus";
-            this.colSightBonus.Width = 86;
+            this.colSightBonus.Width = 109;
             // 
             // colSmgPoint
             // 
@@ -2322,7 +2339,7 @@ namespace FreemanSaveEditor
             this.colSmgPoint.Name = "colSmgPoint";
             this.colSmgPoint.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSmgPoint.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSmgPoint.Width = 34;
+            this.colSmgPoint.Width = 42;
             // 
             // colAssaultRiflePoint
             // 
@@ -2332,7 +2349,7 @@ namespace FreemanSaveEditor
             this.colAssaultRiflePoint.Name = "colAssaultRiflePoint";
             this.colAssaultRiflePoint.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colAssaultRiflePoint.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colAssaultRiflePoint.Width = 28;
+            this.colAssaultRiflePoint.Width = 33;
             // 
             // colRiflePoint
             // 
@@ -2340,7 +2357,7 @@ namespace FreemanSaveEditor
             this.colRiflePoint.HeaderText = "Rifle";
             this.colRiflePoint.MinimumWidth = 6;
             this.colRiflePoint.Name = "colRiflePoint";
-            this.colRiflePoint.Width = 53;
+            this.colRiflePoint.Width = 65;
             // 
             // colMachineGunPoint
             // 
@@ -2348,7 +2365,7 @@ namespace FreemanSaveEditor
             this.colMachineGunPoint.HeaderText = "M.Gun";
             this.colMachineGunPoint.MinimumWidth = 6;
             this.colMachineGunPoint.Name = "colMachineGunPoint";
-            this.colMachineGunPoint.Width = 64;
+            this.colMachineGunPoint.Width = 79;
             // 
             // colPistolPoint
             // 
@@ -2356,7 +2373,7 @@ namespace FreemanSaveEditor
             this.colPistolPoint.HeaderText = "Pistol";
             this.colPistolPoint.MinimumWidth = 6;
             this.colPistolPoint.Name = "colPistolPoint";
-            this.colPistolPoint.Width = 57;
+            this.colPistolPoint.Width = 71;
             // 
             // colMarksmanship
             // 
@@ -2364,6 +2381,7 @@ namespace FreemanSaveEditor
             this.colMarksmanship.HeaderText = "Marksmanship";
             this.colMarksmanship.MinimumWidth = 6;
             this.colMarksmanship.Name = "colMarksmanship";
+            this.colMarksmanship.Width = 128;
             // 
             // colArmorPoint
             // 
@@ -2371,7 +2389,7 @@ namespace FreemanSaveEditor
             this.colArmorPoint.HeaderText = "Armor";
             this.colArmorPoint.MinimumWidth = 6;
             this.colArmorPoint.Name = "colArmorPoint";
-            this.colArmorPoint.Width = 59;
+            this.colArmorPoint.Width = 75;
             // 
             // colShotGunPoint
             // 
@@ -2379,7 +2397,7 @@ namespace FreemanSaveEditor
             this.colShotGunPoint.HeaderText = "ShotGun";
             this.colShotGunPoint.MinimumWidth = 6;
             this.colShotGunPoint.Name = "colShotGunPoint";
-            this.colShotGunPoint.Width = 74;
+            this.colShotGunPoint.Width = 93;
             // 
             // colLauncherPoint
             // 
@@ -2387,7 +2405,7 @@ namespace FreemanSaveEditor
             this.colLauncherPoint.HeaderText = "Launcher";
             this.colLauncherPoint.MinimumWidth = 6;
             this.colLauncherPoint.Name = "colLauncherPoint";
-            this.colLauncherPoint.Width = 77;
+            this.colLauncherPoint.Width = 97;
             // 
             // colThrowingPoint
             // 
@@ -2395,7 +2413,7 @@ namespace FreemanSaveEditor
             this.colThrowingPoint.HeaderText = "Throwing";
             this.colThrowingPoint.MinimumWidth = 6;
             this.colThrowingPoint.Name = "colThrowingPoint";
-            this.colThrowingPoint.Width = 76;
+            this.colThrowingPoint.Width = 95;
             // 
             // menuSquadStats
             // 
@@ -2411,46 +2429,46 @@ namespace FreemanSaveEditor
             this.menuSquadStats.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.menuSquadStats.Name = "menuSquadStats";
             this.menuSquadStats.ShowImageMargin = false;
-            this.menuSquadStats.Size = new System.Drawing.Size(174, 120);
+            this.menuSquadStats.Size = new System.Drawing.Size(205, 130);
             // 
             // menuCopyUnit
             // 
             this.menuCopyUnit.Name = "menuCopyUnit";
-            this.menuCopyUnit.Size = new System.Drawing.Size(173, 22);
+            this.menuCopyUnit.Size = new System.Drawing.Size(204, 24);
             this.menuCopyUnit.Text = "Copy Selected Unit";
             this.menuCopyUnit.Click += new System.EventHandler(this.MenuCopyUnit_Click);
             // 
             // menuPasteUnit
             // 
             this.menuPasteUnit.Name = "menuPasteUnit";
-            this.menuPasteUnit.Size = new System.Drawing.Size(173, 22);
+            this.menuPasteUnit.Size = new System.Drawing.Size(204, 24);
             this.menuPasteUnit.Text = "Paste Unit";
             this.menuPasteUnit.Click += new System.EventHandler(this.MenuPasteUnit_Click);
             // 
             // menuMoveUnit
             // 
             this.menuMoveUnit.Name = "menuMoveUnit";
-            this.menuMoveUnit.Size = new System.Drawing.Size(173, 22);
+            this.menuMoveUnit.Size = new System.Drawing.Size(204, 24);
             this.menuMoveUnit.Text = "Move Selected Unit(s) To";
             this.menuMoveUnit.DropDownOpening += new System.EventHandler(this.MenuMoveUnit_DropDownOpening);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(201, 6);
             // 
             // menuStatsSquad
             // 
             this.menuStatsSquad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuGiveExpToSquad});
             this.menuStatsSquad.Name = "menuStatsSquad";
-            this.menuStatsSquad.Size = new System.Drawing.Size(173, 22);
+            this.menuStatsSquad.Size = new System.Drawing.Size(204, 24);
             this.menuStatsSquad.Text = "Selected Units";
             // 
             // menuGiveExpToSquad
             // 
             this.menuGiveExpToSquad.Name = "menuGiveExpToSquad";
-            this.menuGiveExpToSquad.Size = new System.Drawing.Size(117, 22);
+            this.menuGiveExpToSquad.Size = new System.Drawing.Size(144, 26);
             this.menuGiveExpToSquad.Text = "Give Exp";
             this.menuGiveExpToSquad.Click += new System.EventHandler(this.GiveExpToSquad_Click);
             // 
@@ -2459,23 +2477,23 @@ namespace FreemanSaveEditor
             this.menuStatsAll.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuGiveExpToAll});
             this.menuStatsAll.Name = "menuStatsAll";
-            this.menuStatsAll.Size = new System.Drawing.Size(173, 22);
+            this.menuStatsAll.Size = new System.Drawing.Size(204, 24);
             this.menuStatsAll.Text = "All Squads";
             // 
             // menuGiveExpToAll
             // 
             this.menuGiveExpToAll.Name = "menuGiveExpToAll";
-            this.menuGiveExpToAll.Size = new System.Drawing.Size(117, 22);
+            this.menuGiveExpToAll.Size = new System.Drawing.Size(144, 26);
             this.menuGiveExpToAll.Text = "Give Exp";
             this.menuGiveExpToAll.Click += new System.EventHandler(this.GiveExpToAll_Click);
             // 
             // tabSquadEquips
             // 
             this.tabSquadEquips.Controls.Add(this.dgvSquadEquips);
-            this.tabSquadEquips.Location = new System.Drawing.Point(4, 22);
+            this.tabSquadEquips.Location = new System.Drawing.Point(4, 25);
             this.tabSquadEquips.Name = "tabSquadEquips";
             this.tabSquadEquips.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSquadEquips.Size = new System.Drawing.Size(1152, 295);
+            this.tabSquadEquips.Size = new System.Drawing.Size(1152, 292);
             this.tabSquadEquips.TabIndex = 1;
             this.tabSquadEquips.Text = "Equips";
             this.tabSquadEquips.UseVisualStyleBackColor = true;
@@ -2511,7 +2529,7 @@ namespace FreemanSaveEditor
             this.dgvSquadEquips.RowHeadersVisible = false;
             this.dgvSquadEquips.RowHeadersWidth = 51;
             this.dgvSquadEquips.RowTemplate.Height = 24;
-            this.dgvSquadEquips.Size = new System.Drawing.Size(1146, 289);
+            this.dgvSquadEquips.Size = new System.Drawing.Size(1146, 286);
             this.dgvSquadEquips.TabIndex = 9;
             this.dgvSquadEquips.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSquadEquips_CellDoubleClick);
             this.dgvSquadEquips.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvSquadEquips_CellFormatting);
@@ -2525,7 +2543,7 @@ namespace FreemanSaveEditor
             this.colIsHero2.MinimumWidth = 6;
             this.colIsHero2.Name = "colIsHero2";
             this.colIsHero2.ReadOnly = true;
-            this.colIsHero2.Width = 44;
+            this.colIsHero2.Width = 55;
             // 
             // colName2
             // 
@@ -2543,7 +2561,7 @@ namespace FreemanSaveEditor
             this.colSex2.MinimumWidth = 40;
             this.colSex2.Name = "colSex2";
             this.colSex2.ReadOnly = true;
-            this.colSex2.Width = 50;
+            this.colSex2.Width = 60;
             // 
             // colHelmetId
             // 
@@ -2552,7 +2570,7 @@ namespace FreemanSaveEditor
             this.colHelmetId.MinimumWidth = 6;
             this.colHelmetId.Name = "colHelmetId";
             this.colHelmetId.ReadOnly = true;
-            this.colHelmetId.Width = 65;
+            this.colHelmetId.Width = 81;
             // 
             // colMaskId
             // 
@@ -2561,7 +2579,7 @@ namespace FreemanSaveEditor
             this.colMaskId.MinimumWidth = 6;
             this.colMaskId.Name = "colMaskId";
             this.colMaskId.ReadOnly = true;
-            this.colMaskId.Width = 95;
+            this.colMaskId.Width = 128;
             // 
             // colShirtId
             // 
@@ -2570,7 +2588,7 @@ namespace FreemanSaveEditor
             this.colShirtId.MinimumWidth = 6;
             this.colShirtId.Name = "colShirtId";
             this.colShirtId.ReadOnly = true;
-            this.colShirtId.Width = 67;
+            this.colShirtId.Width = 84;
             // 
             // colArmorId
             // 
@@ -2579,7 +2597,7 @@ namespace FreemanSaveEditor
             this.colArmorId.MinimumWidth = 6;
             this.colArmorId.Name = "colArmorId";
             this.colArmorId.ReadOnly = true;
-            this.colArmorId.Width = 79;
+            this.colArmorId.Width = 111;
             // 
             // colPantsId
             // 
@@ -2588,7 +2606,7 @@ namespace FreemanSaveEditor
             this.colPantsId.MinimumWidth = 6;
             this.colPantsId.Name = "colPantsId";
             this.colPantsId.ReadOnly = true;
-            this.colPantsId.Width = 59;
+            this.colPantsId.Width = 73;
             // 
             // colPistolId
             // 
@@ -2597,7 +2615,7 @@ namespace FreemanSaveEditor
             this.colPistolId.MinimumWidth = 6;
             this.colPistolId.Name = "colPistolId";
             this.colPistolId.ReadOnly = true;
-            this.colPistolId.Width = 57;
+            this.colPistolId.Width = 71;
             // 
             // colRifleId
             // 
@@ -2606,7 +2624,7 @@ namespace FreemanSaveEditor
             this.colRifleId.MinimumWidth = 6;
             this.colRifleId.Name = "colRifleId";
             this.colRifleId.ReadOnly = true;
-            this.colRifleId.Width = 53;
+            this.colRifleId.Width = 65;
             // 
             // colMISC1Id
             // 
@@ -2615,7 +2633,7 @@ namespace FreemanSaveEditor
             this.colMISC1Id.MinimumWidth = 6;
             this.colMISC1Id.Name = "colMISC1Id";
             this.colMISC1Id.ReadOnly = true;
-            this.colMISC1Id.Width = 50;
+            this.colMISC1Id.Width = 73;
             // 
             // colMISC2Id
             // 
@@ -2624,7 +2642,7 @@ namespace FreemanSaveEditor
             this.colMISC2Id.MinimumWidth = 6;
             this.colMISC2Id.Name = "colMISC2Id";
             this.colMISC2Id.ReadOnly = true;
-            this.colMISC2Id.Width = 50;
+            this.colMISC2Id.Width = 73;
             // 
             // colMISC3Id
             // 
@@ -2633,7 +2651,7 @@ namespace FreemanSaveEditor
             this.colMISC3Id.MinimumWidth = 6;
             this.colMISC3Id.Name = "colMISC3Id";
             this.colMISC3Id.ReadOnly = true;
-            this.colMISC3Id.Width = 50;
+            this.colMISC3Id.Width = 73;
             // 
             // menuSquadEquips
             // 
@@ -2645,7 +2663,7 @@ namespace FreemanSaveEditor
             this.menuSquadEquips.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.menuSquadEquips.Name = "contextMenuStrip1";
             this.menuSquadEquips.ShowImageMargin = false;
-            this.menuSquadEquips.Size = new System.Drawing.Size(164, 48);
+            this.menuSquadEquips.Size = new System.Drawing.Size(189, 52);
             // 
             // menuEquipsSquad
             // 
@@ -2663,95 +2681,95 @@ namespace FreemanSaveEditor
             this.giveItem2SlotToolStripMenuItem,
             this.giveItem3SlotToolStripMenuItem});
             this.menuEquipsSquad.Name = "menuEquipsSquad";
-            this.menuEquipsSquad.Size = new System.Drawing.Size(163, 22);
+            this.menuEquipsSquad.Size = new System.Drawing.Size(188, 24);
             this.menuEquipsSquad.Text = "Selected Units";
             // 
             // menuUseSetup
             // 
             this.menuUseSetup.Name = "menuUseSetup";
-            this.menuUseSetup.Size = new System.Drawing.Size(173, 22);
+            this.menuUseSetup.Size = new System.Drawing.Size(211, 26);
             this.menuUseSetup.Text = "Use Saved Setup";
             this.menuUseSetup.DropDownOpening += new System.EventHandler(this.MenuUseSetup_DropDownOpening);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(208, 6);
             // 
             // giveHelmetToolStripMenuItem
             // 
             this.giveHelmetToolStripMenuItem.Name = "giveHelmetToolStripMenuItem";
-            this.giveHelmetToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveHelmetToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveHelmetToolStripMenuItem.Text = "Give Helmet";
             this.giveHelmetToolStripMenuItem.Click += new System.EventHandler(this.GiveHelmetToolStripMenuItem_Click);
             // 
             // giveMaskGooglesToolStripMenuItem
             // 
             this.giveMaskGooglesToolStripMenuItem.Name = "giveMaskGooglesToolStripMenuItem";
-            this.giveMaskGooglesToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveMaskGooglesToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveMaskGooglesToolStripMenuItem.Text = "Give Mask/Googles";
             this.giveMaskGooglesToolStripMenuItem.Click += new System.EventHandler(this.GiveMaskGooglesToolStripMenuItem_Click);
             // 
             // giveArmorToolStripMenuItem
             // 
             this.giveArmorToolStripMenuItem.Name = "giveArmorToolStripMenuItem";
-            this.giveArmorToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveArmorToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveArmorToolStripMenuItem.Text = "Give Armor";
             this.giveArmorToolStripMenuItem.Click += new System.EventHandler(this.GiveArmorToolStripMenuItem_Click);
             // 
             // giveShirtToolStripMenuItem
             // 
             this.giveShirtToolStripMenuItem.Name = "giveShirtToolStripMenuItem";
-            this.giveShirtToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveShirtToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveShirtToolStripMenuItem.Text = "Give Shirt";
             this.giveShirtToolStripMenuItem.Click += new System.EventHandler(this.GiveShirtToolStripMenuItem_Click);
             // 
             // givePantsToolStripMenuItem
             // 
             this.givePantsToolStripMenuItem.Name = "givePantsToolStripMenuItem";
-            this.givePantsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.givePantsToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.givePantsToolStripMenuItem.Text = "Give Pants";
             this.givePantsToolStripMenuItem.Click += new System.EventHandler(this.GivePantsToolStripMenuItem_Click);
             // 
             // giveWeaponToolStripMenuItem
             // 
             this.giveWeaponToolStripMenuItem.Name = "giveWeaponToolStripMenuItem";
-            this.giveWeaponToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveWeaponToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveWeaponToolStripMenuItem.Text = "Give Weapon";
             this.giveWeaponToolStripMenuItem.Click += new System.EventHandler(this.GiveWeaponToolStripMenuItem_Click);
             // 
             // givePistolToolStripMenuItem
             // 
             this.givePistolToolStripMenuItem.Name = "givePistolToolStripMenuItem";
-            this.givePistolToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.givePistolToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.givePistolToolStripMenuItem.Text = "Give Pistol";
             this.givePistolToolStripMenuItem.Click += new System.EventHandler(this.GivePistolToolStripMenuItem_Click);
             // 
             // giveItem1ToolStripMenuItem
             // 
             this.giveItem1ToolStripMenuItem.Name = "giveItem1ToolStripMenuItem";
-            this.giveItem1ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveItem1ToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveItem1ToolStripMenuItem.Text = "Give Item (1. Slot)";
             this.giveItem1ToolStripMenuItem.Click += new System.EventHandler(this.GiveItem1ToolStripMenuItem_Click);
             // 
             // giveItem2SlotToolStripMenuItem
             // 
             this.giveItem2SlotToolStripMenuItem.Name = "giveItem2SlotToolStripMenuItem";
-            this.giveItem2SlotToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveItem2SlotToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveItem2SlotToolStripMenuItem.Text = "Give Item (2. Slot)";
             this.giveItem2SlotToolStripMenuItem.Click += new System.EventHandler(this.GiveItem2SlotToolStripMenuItem_Click);
             // 
             // giveItem3SlotToolStripMenuItem
             // 
             this.giveItem3SlotToolStripMenuItem.Name = "giveItem3SlotToolStripMenuItem";
-            this.giveItem3SlotToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.giveItem3SlotToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
             this.giveItem3SlotToolStripMenuItem.Text = "Give Item (3. Slot)";
             this.giveItem3SlotToolStripMenuItem.Click += new System.EventHandler(this.GiveItem3SlotToolStripMenuItem_Click);
             // 
             // menuSaveSetup
             // 
             this.menuSaveSetup.Name = "menuSaveSetup";
-            this.menuSaveSetup.Size = new System.Drawing.Size(163, 22);
+            this.menuSaveSetup.Size = new System.Drawing.Size(188, 24);
             this.menuSaveSetup.Text = "Save Unit Equip Setup";
             this.menuSaveSetup.Click += new System.EventHandler(this.MenuSaveSetup_Click);
             // 
@@ -2762,7 +2780,7 @@ namespace FreemanSaveEditor
             this.lbPartySize.ForeColor = System.Drawing.Color.DarkGreen;
             this.lbPartySize.Location = new System.Drawing.Point(39, 15);
             this.lbPartySize.Name = "lbPartySize";
-            this.lbPartySize.Size = new System.Drawing.Size(79, 15);
+            this.lbPartySize.Size = new System.Drawing.Size(95, 18);
             this.lbPartySize.TabIndex = 6;
             this.lbPartySize.Text = "Party Size: ";
             // 
@@ -2773,7 +2791,7 @@ namespace FreemanSaveEditor
             this.label45.ForeColor = System.Drawing.Color.DarkGreen;
             this.label45.Location = new System.Drawing.Point(39, 40);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(679, 15);
+            this.label45.Size = new System.Drawing.Size(825, 18);
             this.label45.TabIndex = 5;
             this.label45.Text = "Use at your own risk, creating squads more than allowed might crash your game, a " +
     "backup is always created in save folder :)";
@@ -2813,7 +2831,7 @@ namespace FreemanSaveEditor
             this.label44.AutoSize = true;
             this.label44.Location = new System.Drawing.Point(226, 117);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(124, 13);
+            this.label44.Size = new System.Drawing.Size(162, 17);
             this.label44.TabIndex = 1;
             this.label44.Text = "Select A Squad To Edit :";
             // 
@@ -2826,9 +2844,101 @@ namespace FreemanSaveEditor
             this.cbSquads.FormattingEnabled = true;
             this.cbSquads.Location = new System.Drawing.Point(366, 112);
             this.cbSquads.Name = "cbSquads";
-            this.cbSquads.Size = new System.Drawing.Size(188, 23);
+            this.cbSquads.Size = new System.Drawing.Size(188, 26);
             this.cbSquads.TabIndex = 0;
             this.cbSquads.SelectedIndexChanged += new System.EventHandler(this.BtEdit_Click);
+            // 
+            // tabInventory
+            // 
+            this.tabInventory.Controls.Add(this.label48);
+            this.tabInventory.Controls.Add(this.dgvInventory);
+            this.tabInventory.Location = new System.Drawing.Point(4, 25);
+            this.tabInventory.Name = "tabInventory";
+            this.tabInventory.Size = new System.Drawing.Size(1160, 575);
+            this.tabInventory.TabIndex = 3;
+            this.tabInventory.Text = "Inventory";
+            this.tabInventory.UseVisualStyleBackColor = true;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label48.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label48.Location = new System.Drawing.Point(20, 10);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(868, 40);
+            this.label48.TabIndex = 3;
+            this.label48.Text = resources.GetString("label48.Text");
+            // 
+            // dgvInventory
+            // 
+            this.dgvInventory.AllowUserToAddRows = false;
+            this.dgvInventory.AllowUserToDeleteRows = false;
+            this.dgvInventory.AllowUserToResizeColumns = false;
+            this.dgvInventory.AllowUserToResizeRows = false;
+            this.dgvInventory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvInventory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvInventory.BackgroundColor = System.Drawing.Color.White;
+            this.dgvInventory.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInventory.ColumnHeadersVisible = false;
+            this.dgvInventory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colInventory1,
+            this.colInventory2,
+            this.colInventory3,
+            this.colInventory4});
+            this.dgvInventory.ContextMenuStrip = this.menuInventory;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInventory.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvInventory.Location = new System.Drawing.Point(24, 53);
+            this.dgvInventory.Name = "dgvInventory";
+            this.dgvInventory.ReadOnly = true;
+            this.dgvInventory.RowHeadersVisible = false;
+            this.dgvInventory.RowHeadersWidth = 51;
+            this.dgvInventory.RowTemplate.Height = 24;
+            this.dgvInventory.Size = new System.Drawing.Size(803, 508);
+            this.dgvInventory.TabIndex = 0;
+            this.dgvInventory.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvInventory_CellDoubleClick);
+            this.dgvInventory.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvInventory_CellFormatting);
+            // 
+            // colInventory1
+            // 
+            this.colInventory1.DataPropertyName = "Col1";
+            this.colInventory1.HeaderText = "colInventory1";
+            this.colInventory1.MinimumWidth = 6;
+            this.colInventory1.Name = "colInventory1";
+            this.colInventory1.ReadOnly = true;
+            // 
+            // colInventory2
+            // 
+            this.colInventory2.DataPropertyName = "Col2";
+            this.colInventory2.HeaderText = "colInventory2";
+            this.colInventory2.MinimumWidth = 6;
+            this.colInventory2.Name = "colInventory2";
+            this.colInventory2.ReadOnly = true;
+            // 
+            // colInventory3
+            // 
+            this.colInventory3.DataPropertyName = "Col3";
+            this.colInventory3.HeaderText = "colInventory3";
+            this.colInventory3.MinimumWidth = 6;
+            this.colInventory3.Name = "colInventory3";
+            this.colInventory3.ReadOnly = true;
+            // 
+            // colInventory4
+            // 
+            this.colInventory4.DataPropertyName = "Col4";
+            this.colInventory4.HeaderText = "colInventory4";
+            this.colInventory4.MinimumWidth = 6;
+            this.colInventory4.Name = "colInventory4";
+            this.colInventory4.ReadOnly = true;
             // 
             // label1
             // 
@@ -2848,9 +2958,9 @@ namespace FreemanSaveEditor
             this.btBrowseGame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btBrowseGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btBrowseGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btBrowseGame.Location = new System.Drawing.Point(958, 44);
+            this.btBrowseGame.Location = new System.Drawing.Point(957, 44);
             this.btBrowseGame.Name = "btBrowseGame";
-            this.btBrowseGame.Size = new System.Drawing.Size(35, 29);
+            this.btBrowseGame.Size = new System.Drawing.Size(36, 32);
             this.btBrowseGame.TabIndex = 5;
             this.btBrowseGame.Text = "...";
             this.btBrowseGame.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2864,9 +2974,9 @@ namespace FreemanSaveEditor
             this.btBrowseSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btBrowseSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btBrowseSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btBrowseSave.Location = new System.Drawing.Point(958, 40);
+            this.btBrowseSave.Location = new System.Drawing.Point(957, 40);
             this.btBrowseSave.Name = "btBrowseSave";
-            this.btBrowseSave.Size = new System.Drawing.Size(35, 29);
+            this.btBrowseSave.Size = new System.Drawing.Size(36, 32);
             this.btBrowseSave.TabIndex = 7;
             this.btBrowseSave.Text = "...";
             this.btBrowseSave.UseVisualStyleBackColor = true;
@@ -2904,7 +3014,7 @@ namespace FreemanSaveEditor
             this.txtSaveLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtSaveLocation.Location = new System.Drawing.Point(105, 46);
             this.txtSaveLocation.Name = "txtSaveLocation";
-            this.txtSaveLocation.Size = new System.Drawing.Size(830, 20);
+            this.txtSaveLocation.Size = new System.Drawing.Size(830, 23);
             this.txtSaveLocation.TabIndex = 6;
             this.txtSaveLocation.Text = global::FreemanSaveEditor.Properties.Settings.Default.SaveLocation;
             this.txtSaveLocation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtSaveLocation_MouseClick);
@@ -2917,7 +3027,7 @@ namespace FreemanSaveEditor
             this.txtGameLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtGameLocation.Location = new System.Drawing.Point(105, 49);
             this.txtGameLocation.Name = "txtGameLocation";
-            this.txtGameLocation.Size = new System.Drawing.Size(830, 20);
+            this.txtGameLocation.Size = new System.Drawing.Size(830, 23);
             this.txtGameLocation.TabIndex = 4;
             this.txtGameLocation.Text = global::FreemanSaveEditor.Properties.Settings.Default.GameLocation;
             this.txtGameLocation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtGameLocation_MouseClick);
@@ -3025,6 +3135,7 @@ namespace FreemanSaveEditor
             this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btCancel.ForeColor = System.Drawing.Color.Red;
             this.btCancel.Location = new System.Drawing.Point(3, 3);
+            this.btCancel.MinimumSize = new System.Drawing.Size(84, 28);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(84, 28);
             this.btCancel.TabIndex = 2;
@@ -3112,12 +3223,47 @@ namespace FreemanSaveEditor
             this.toolStripMenuItem12.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem12.Text = "Give Item (3. Slot)";
             // 
+            // menuInventory
+            // 
+            this.menuInventory.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.menuInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuInventory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectedSlotsToolStripMenuItem,
+            this.menuAddItem});
+            this.menuInventory.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.menuInventory.Name = "contextMenuStrip1";
+            this.menuInventory.ShowImageMargin = false;
+            this.menuInventory.Size = new System.Drawing.Size(216, 52);
+            // 
+            // selectedSlotsToolStripMenuItem
+            // 
+            this.selectedSlotsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuReplace});
+            this.selectedSlotsToolStripMenuItem.Name = "selectedSlotsToolStripMenuItem";
+            this.selectedSlotsToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.selectedSlotsToolStripMenuItem.Text = "Selected Slots";
+            // 
+            // menuReplace
+            // 
+            this.menuReplace.Name = "menuReplace";
+            this.menuReplace.Size = new System.Drawing.Size(224, 26);
+            this.menuReplace.Text = "Replace";
+            this.menuReplace.Click += new System.EventHandler(this.MenuReplace_Click);
+            // 
+            // menuAddItem
+            // 
+            this.menuAddItem.Name = "menuAddItem";
+            this.menuAddItem.Size = new System.Drawing.Size(215, 24);
+            this.menuAddItem.Text = "Add Item Into Empty Slots";
+            this.menuAddItem.Click += new System.EventHandler(this.MenuAddItem_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1182, 653);
             this.Controls.Add(this.tabMenu);
             this.DoubleBuffered = true;
+            this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "FrmMain";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -3177,6 +3323,9 @@ namespace FreemanSaveEditor
             this.tabSquadEquips.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSquadEquips)).EndInit();
             this.menuSquadEquips.ResumeLayout(false);
+            this.tabInventory.ResumeLayout(false);
+            this.tabInventory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).EndInit();
             this.tabMenu.ResumeLayout(false);
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
@@ -3186,6 +3335,7 @@ namespace FreemanSaveEditor
             this.groupBox1.PerformLayout();
             this.tabSaveFile.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.menuInventory.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3446,6 +3596,17 @@ namespace FreemanSaveEditor
         private ToolStripMenuItem menuSaveSetup;
         private ToolStripMenuItem menuUseSetup;
         private ToolStripSeparator toolStripSeparator2;
+        private TabPage tabInventory;
+        private Label label48;
+        private DataGridView dgvInventory;
+        private DataGridViewTextBoxColumn colInventory1;
+        private DataGridViewTextBoxColumn colInventory2;
+        private DataGridViewTextBoxColumn colInventory3;
+        private DataGridViewTextBoxColumn colInventory4;
+        private ContextMenuStrip menuInventory;
+        private ToolStripMenuItem selectedSlotsToolStripMenuItem;
+        private ToolStripMenuItem menuReplace;
+        private ToolStripMenuItem menuAddItem;
     }
 }
 

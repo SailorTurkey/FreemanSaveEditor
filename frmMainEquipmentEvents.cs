@@ -8,6 +8,34 @@ namespace FreemanSaveEditor
 {
     public partial class FrmMain
     {
+        private long ShowInventorySelection(bool returnId = false, int RowIndex = -1, int ColIndex = -1)
+        {
+            if (!returnId && dgvInventory.SelectedCells.Count < 1) return 0;
+
+            using (FrmEquipSelection equipSelection = new FrmEquipSelection(FrmEquipSelection.EquipSelectionMode.Inventory))
+            {
+                equipSelection.ShowDialog();
+
+                if (equipSelection.Id > 0)
+                {
+                    if (returnId)
+                        return equipSelection.Id;
+
+                    if (RowIndex > -1 && ColIndex > -1)
+                    {
+                        dgvInventory.Rows[RowIndex].Cells[ColIndex].Value = equipSelection.Id;
+                        return equipSelection.Id;
+                    }
+                    foreach (DataGridViewCell cell in dgvInventory.SelectedCells)
+                    {
+                        cell.Value = equipSelection.Id;
+                    }
+                    return equipSelection.Id;
+                }
+                return 0;
+            }
+        }
+
         private void ShowSquadEquipSelection(FrmEquipSelection.EquipSelectionMode mode, int RowIndex, int ColIndex)
         {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
@@ -29,7 +57,7 @@ namespace FreemanSaveEditor
 
                 if (equipSelection.Id > 0)
                 {
-                    foreach (var row in rows)
+                    foreach (DataGridViewRow row in rows)
                     {
                         row.Cells[ColIndex].Value = equipSelection.Id;
                     }

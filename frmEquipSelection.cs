@@ -18,6 +18,7 @@ namespace FreemanSaveEditor
             switch (mode)
             {
                 case EquipSelectionMode.Inventory:
+                    dgv.DataSource = Program.CurrentItems.CopyToDataTable();
                     break;
 
                 case EquipSelectionMode.Helmet:
@@ -102,7 +103,7 @@ namespace FreemanSaveEditor
             (dgv.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", filterField, txtSearch.Text);
         }
 
-        private void dgv_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void Dgv_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.RowIndex < dgv.Rows.Count)
             {
