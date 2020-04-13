@@ -67,7 +67,7 @@ namespace FreemanSaveEditor
 
         private void ShowPlayerEquipSelection(FrmEquipSelection.EquipSelectionMode mode)
         {
-            using (FrmEquipSelection equipSelection = new FrmEquipSelection(FrmEquipSelection.EquipSelectionMode.Helmet))
+            using (FrmEquipSelection equipSelection = new FrmEquipSelection(mode))
             {
                 equipSelection.ShowDialog();
 

@@ -17,7 +17,8 @@ namespace QuickType
     using J = Newtonsoft.Json.JsonPropertyAttribute;
     using R = Newtonsoft.Json.Required;
     using N = Newtonsoft.Json.NullValueHandling;
-
+    
+    [Serializable]
     public partial class Weapon
     {
         [J("ID")] public long Id { get; set; }

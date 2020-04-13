@@ -17,11 +17,12 @@ namespace FreemanSaveEditor
         {
             get
             {
-                return
-                    Col1 == 0 ? 1 : 0 +
-                    Col2 == 0 ? 1 : 0 +
-                    Col3 == 0 ? 1 : 0 +
-                    Col4 == 0 ? 1 : 0;
+                int emptyCount = 0;
+                emptyCount += Col1 == 0 ? 1 : 0;
+                emptyCount += Col2 == 0 ? 1 : 0;
+                emptyCount += Col3 == 0 ? 1 : 0;
+                emptyCount += Col4 == 0 ? 1 : 0;
+                return emptyCount;
             }
         }
 
@@ -86,6 +87,16 @@ namespace FreemanSaveEditor
             i += ColCount;
 
             return row;
+        }
+
+        public IEnumerable<MapAgentItem> GetItems()
+        {
+            return new MapAgentItem[] {
+                new MapAgentItem() { Id = Col1 },
+                new MapAgentItem() { Id = Col2 },
+                new MapAgentItem() { Id = Col3 },
+                new MapAgentItem() { Id = Col4 }
+            };
         }
     }
 }

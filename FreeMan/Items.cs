@@ -23,6 +23,7 @@ namespace QuickType
     using System.Windows.Forms;
     using System.Linq;
 
+    [Serializable]
     public partial class Item
     {
         [J("ID")] public long Id { get; set; }

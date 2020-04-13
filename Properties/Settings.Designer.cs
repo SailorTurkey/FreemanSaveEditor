@@ -57,5 +57,16 @@ namespace FreemanSaveEditor.Properties {
                 this["SavedSetups"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection SavedSquads {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["SavedSquads"]));
+            }
+            set {
+                this["SavedSquads"] = value;
+            }
+        }
     }
 }

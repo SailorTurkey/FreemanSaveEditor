@@ -19,6 +19,8 @@ namespace QuickType
     using N = Newtonsoft.Json.NullValueHandling;
     using System.ComponentModel;
     using System.Runtime.Serialization;
+    using FreemanSaveEditor;
+    using System.Linq;
 
     public partial class Player
     {
@@ -155,15 +157,15 @@ namespace QuickType
         [J("FactionId")] public long FactionId { get; set; }
         [J("SilkRoadID")] public long SilkRoadId { get; set; }
         [J("IsHaveSilkRoad")] public long IsHaveSilkRoad { get; set; }
-        [J("ArmyPosition")] public BindingList<Position> ArmyPosition { get; set; }
-        [J("Squads")] public BindingList<Squad> Squads { get; set; }
+        [J("ArmyPosition")] public SortableBindingList<Position> ArmyPosition { get; set; }
+        [J("Squads")] public SortableBindingList<Squad> Squads { get; set; }
         [J("UnassignedUnits")] public UnassignedUnits UnassignedUnits { get; set; }
         [J("Prisoners")] public Prisoners Prisoners { get; set; }
     }
 
     public partial class Prisoners
     {
-        [J("Prisoner")] public BindingList<Prisoner> Prisoner { get; set; }
+        [J("Prisoner")] public SortableBindingList<Prisoner> Prisoner { get; set; }
     }
 
 
@@ -221,6 +223,16 @@ namespace QuickType
         [J("LiYouNum")] public long LiYouNum { get; set; }
         [J("LiYouCoin")] public long LiYouCoin { get; set; }
 
+
+        private decimal? speed;
+        [JsonIgnore] public decimal? Speed { get {
+                if (speed.HasValue) return speed;
+
+                speed = Program.SolderList.Where(x => x.Id == this.Id).FirstOrDefault()?.Speed;
+
+                return speed;
+            } }
+
     }
      [Serializable]
     public partial class Squad
@@ -229,7 +241,7 @@ namespace QuickType
         [J("IconName")] public string IconName { get; set; }
         [J("SquadLefts")] public long SquadLefts { get; set; }
         [J("FormationIndex")] public long FormationIndex { get; set; }
-        [J("Soldiers")] public BindingList<Prisoner> Soldiers { get; set; } = new BindingList<Prisoner>();
+        [J("Soldiers")] public SortableBindingList<Prisoner> Soldiers { get; set; } = new SortableBindingList<Prisoner>();
 
         [JsonIgnore] public Guid guid = Guid.NewGuid();
 
@@ -241,7 +253,7 @@ namespace QuickType
 
     public partial class UnassignedUnits
     {
-        [J("UnassignedSoldiers")] public BindingList<Prisoner> UnassignedSoldiers { get; set; }
+        [J("UnassignedSoldiers")] public SortableBindingList<Prisoner> UnassignedSoldiers { get; set; }
     }
 
     public enum EyeName { Eye01, Eye02, Eye03, Eye04, Eye05, Eye06, Eye07, Eye08 };

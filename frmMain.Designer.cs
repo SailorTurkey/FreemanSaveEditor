@@ -186,26 +186,25 @@ namespace FreemanSaveEditor
             this.lbHELMET = new System.Windows.Forms.Label();
             this.picHelmet = new System.Windows.Forms.PictureBox();
             this.tabSquads = new System.Windows.Forms.TabPage();
+            this.btRestoreSquad = new System.Windows.Forms.Button();
+            this.btSaveSquadSetup = new System.Windows.Forms.Button();
             this.btDuplicate = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btMaxMorale = new System.Windows.Forms.Button();
             this.label47 = new System.Windows.Forms.Label();
             this.panSquad = new System.Windows.Forms.Panel();
-            this.lbSquadSize = new System.Windows.Forms.Label();
-            this.btToReserve = new System.Windows.Forms.Button();
-            this.btAddSoldier = new System.Windows.Forms.Button();
-            this.btDeleteSoldier = new System.Windows.Forms.Button();
-            this.btEditSoldier = new System.Windows.Forms.Button();
             this.tabsSquadDetails = new System.Windows.Forms.TabControl();
             this.tabSquadStats = new System.Windows.Forms.TabPage();
             this.dgvSquadStats = new System.Windows.Forms.DataGridView();
             this.colIsHero = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHealth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMorale = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSightBonus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpeed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSmgPoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssaultRiflePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRiflePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -255,6 +254,13 @@ namespace FreemanSaveEditor
             this.giveItem2SlotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giveItem3SlotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSaveSetup = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btAddAll = new System.Windows.Forms.Button();
+            this.lbSquadSize = new System.Windows.Forms.Label();
+            this.btEditSoldier = new System.Windows.Forms.Button();
+            this.btToReserve = new System.Windows.Forms.Button();
+            this.btDeleteSoldier = new System.Windows.Forms.Button();
+            this.btAddSoldier = new System.Windows.Forms.Button();
             this.lbPartySize = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.btDelete = new System.Windows.Forms.Button();
@@ -263,27 +269,33 @@ namespace FreemanSaveEditor
             this.label44 = new System.Windows.Forms.Label();
             this.cbSquads = new System.Windows.Forms.ComboBox();
             this.tabInventory = new System.Windows.Forms.TabPage();
+            this.btGiveWoodIronTool = new System.Windows.Forms.Button();
             this.label48 = new System.Windows.Forms.Label();
             this.dgvInventory = new System.Windows.Forms.DataGridView();
             this.colInventory1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventory2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventory3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventory4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.selectedSlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReplace = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.btBrowseGame = new System.Windows.Forms.Button();
             this.btBrowseSave = new System.Windows.Forms.Button();
             this.btStart = new System.Windows.Forms.Button();
             this.menuSaveList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.txtSaveLocation = new System.Windows.Forms.TextBox();
-            this.txtGameLocation = new System.Windows.Forms.TextBox();
             this.tabMenu = new System.Windows.Forms.TabControl();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtSaveLocation = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtGameLocation = new System.Windows.Forms.TextBox();
             this.tabSaveFile = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btSave = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
+            this.btSaveAndContinue = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuSoldierList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -297,10 +309,10 @@ namespace FreemanSaveEditor
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.selectedSlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReplace = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAddItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRestore = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabs.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -348,15 +360,17 @@ namespace FreemanSaveEditor
             this.tabSquadEquips.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSquadEquips)).BeginInit();
             this.menuSquadEquips.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tabInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
+            this.menuInventory.SuspendLayout();
             this.tabMenu.SuspendLayout();
             this.tabSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabSaveFile.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.menuInventory.SuspendLayout();
+            this.menuRestore.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabs
@@ -2083,7 +2097,6 @@ namespace FreemanSaveEditor
             // 
             // tabSquads
             // 
-            this.tabSquads.Controls.Add(this.btDuplicate);
             this.tabSquads.Controls.Add(this.groupBox3);
             this.tabSquads.Controls.Add(this.label47);
             this.tabSquads.Controls.Add(this.panSquad);
@@ -2101,19 +2114,48 @@ namespace FreemanSaveEditor
             this.tabSquads.Text = "Party";
             this.tabSquads.UseVisualStyleBackColor = true;
             // 
+            // btRestoreSquad
+            // 
+            this.btRestoreSquad.BackColor = System.Drawing.Color.White;
+            this.btRestoreSquad.ForeColor = System.Drawing.Color.Green;
+            this.btRestoreSquad.Location = new System.Drawing.Point(342, 19);
+            this.btRestoreSquad.Name = "btRestoreSquad";
+            this.btRestoreSquad.Size = new System.Drawing.Size(126, 26);
+            this.btRestoreSquad.TabIndex = 19;
+            this.btRestoreSquad.Text = "Restore Squad";
+            this.btRestoreSquad.UseVisualStyleBackColor = false;
+            this.btRestoreSquad.Click += new System.EventHandler(this.BtRestoreSquad_Click);
+            // 
+            // btSaveSquadSetup
+            // 
+            this.btSaveSquadSetup.BackColor = System.Drawing.Color.White;
+            this.btSaveSquadSetup.ForeColor = System.Drawing.Color.Green;
+            this.btSaveSquadSetup.Location = new System.Drawing.Point(223, 19);
+            this.btSaveSquadSetup.Name = "btSaveSquadSetup";
+            this.btSaveSquadSetup.Size = new System.Drawing.Size(101, 26);
+            this.btSaveSquadSetup.TabIndex = 18;
+            this.btSaveSquadSetup.Text = "Save Squad";
+            this.btSaveSquadSetup.UseVisualStyleBackColor = false;
+            this.btSaveSquadSetup.Click += new System.EventHandler(this.BtSaveSquadSetup_Click);
+            // 
             // btDuplicate
             // 
-            this.btDuplicate.Location = new System.Drawing.Point(823, 110);
+            this.btDuplicate.BackColor = System.Drawing.Color.White;
+            this.btDuplicate.ForeColor = System.Drawing.Color.Green;
+            this.btDuplicate.Location = new System.Drawing.Point(130, 19);
             this.btDuplicate.Name = "btDuplicate";
             this.btDuplicate.Size = new System.Drawing.Size(75, 26);
             this.btDuplicate.TabIndex = 17;
-            this.btDuplicate.Text = "Duplicate";
-            this.btDuplicate.UseVisualStyleBackColor = true;
+            this.btDuplicate.Text = "Duplicate Squad";
+            this.btDuplicate.UseVisualStyleBackColor = false;
             this.btDuplicate.Click += new System.EventHandler(this.BtDuplicate_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btRestoreSquad);
             this.groupBox3.Controls.Add(this.btMaxMorale);
+            this.groupBox3.Controls.Add(this.btSaveSquadSetup);
+            this.groupBox3.Controls.Add(this.btDuplicate);
             this.groupBox3.Location = new System.Drawing.Point(229, 152);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(579, 51);
@@ -2127,7 +2169,7 @@ namespace FreemanSaveEditor
             this.btMaxMorale.ForeColor = System.Drawing.Color.Green;
             this.btMaxMorale.Location = new System.Drawing.Point(6, 19);
             this.btMaxMorale.Name = "btMaxMorale";
-            this.btMaxMorale.Size = new System.Drawing.Size(75, 26);
+            this.btMaxMorale.Size = new System.Drawing.Size(106, 26);
             this.btMaxMorale.TabIndex = 17;
             this.btMaxMorale.Text = "Max Morale";
             this.btMaxMorale.UseVisualStyleBackColor = false;
@@ -2147,79 +2189,26 @@ namespace FreemanSaveEditor
             // 
             // panSquad
             // 
-            this.panSquad.Controls.Add(this.lbSquadSize);
-            this.panSquad.Controls.Add(this.btToReserve);
-            this.panSquad.Controls.Add(this.btAddSoldier);
-            this.panSquad.Controls.Add(this.btDeleteSoldier);
-            this.panSquad.Controls.Add(this.btEditSoldier);
+            this.panSquad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panSquad.Controls.Add(this.tabsSquadDetails);
-            this.panSquad.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panSquad.Controls.Add(this.panel1);
             this.panSquad.Location = new System.Drawing.Point(0, 229);
             this.panSquad.Name = "panSquad";
             this.panSquad.Size = new System.Drawing.Size(1160, 346);
             this.panSquad.TabIndex = 14;
             this.panSquad.Visible = false;
             // 
-            // lbSquadSize
-            // 
-            this.lbSquadSize.AutoSize = true;
-            this.lbSquadSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lbSquadSize.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lbSquadSize.Location = new System.Drawing.Point(4, 7);
-            this.lbSquadSize.Name = "lbSquadSize";
-            this.lbSquadSize.Size = new System.Drawing.Size(91, 18);
-            this.lbSquadSize.TabIndex = 14;
-            this.lbSquadSize.Text = "Squad Size: ";
-            // 
-            // btToReserve
-            // 
-            this.btToReserve.Location = new System.Drawing.Point(391, 16);
-            this.btToReserve.Name = "btToReserve";
-            this.btToReserve.Size = new System.Drawing.Size(100, 23);
-            this.btToReserve.TabIndex = 13;
-            this.btToReserve.Text = "To Reserves";
-            this.btToReserve.UseVisualStyleBackColor = true;
-            this.btToReserve.Click += new System.EventHandler(this.BtToReserve_Click);
-            // 
-            // btAddSoldier
-            // 
-            this.btAddSoldier.Location = new System.Drawing.Point(133, 16);
-            this.btAddSoldier.Name = "btAddSoldier";
-            this.btAddSoldier.Size = new System.Drawing.Size(75, 23);
-            this.btAddSoldier.TabIndex = 10;
-            this.btAddSoldier.Text = "Add";
-            this.btAddSoldier.UseVisualStyleBackColor = true;
-            this.btAddSoldier.Click += new System.EventHandler(this.BtAddSoldier_Click);
-            // 
-            // btDeleteSoldier
-            // 
-            this.btDeleteSoldier.Location = new System.Drawing.Point(305, 16);
-            this.btDeleteSoldier.Name = "btDeleteSoldier";
-            this.btDeleteSoldier.Size = new System.Drawing.Size(75, 23);
-            this.btDeleteSoldier.TabIndex = 12;
-            this.btDeleteSoldier.Text = "Delete";
-            this.btDeleteSoldier.UseVisualStyleBackColor = true;
-            this.btDeleteSoldier.Click += new System.EventHandler(this.BtDeleteSoldier_Click);
-            // 
-            // btEditSoldier
-            // 
-            this.btEditSoldier.Location = new System.Drawing.Point(219, 16);
-            this.btEditSoldier.Name = "btEditSoldier";
-            this.btEditSoldier.Size = new System.Drawing.Size(75, 23);
-            this.btEditSoldier.TabIndex = 11;
-            this.btEditSoldier.Text = "Replace";
-            this.btEditSoldier.UseVisualStyleBackColor = true;
-            this.btEditSoldier.Click += new System.EventHandler(this.BtEditSoldier_Click);
-            // 
             // tabsSquadDetails
             // 
             this.tabsSquadDetails.Controls.Add(this.tabSquadStats);
             this.tabsSquadDetails.Controls.Add(this.tabSquadEquips);
-            this.tabsSquadDetails.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabsSquadDetails.Location = new System.Drawing.Point(0, 25);
+            this.tabsSquadDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsSquadDetails.Location = new System.Drawing.Point(0, 46);
             this.tabsSquadDetails.Name = "tabsSquadDetails";
             this.tabsSquadDetails.SelectedIndex = 0;
-            this.tabsSquadDetails.Size = new System.Drawing.Size(1160, 321);
+            this.tabsSquadDetails.Size = new System.Drawing.Size(1160, 300);
             this.tabsSquadDetails.TabIndex = 9;
             // 
             // tabSquadStats
@@ -2228,7 +2217,7 @@ namespace FreemanSaveEditor
             this.tabSquadStats.Location = new System.Drawing.Point(4, 25);
             this.tabSquadStats.Name = "tabSquadStats";
             this.tabSquadStats.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSquadStats.Size = new System.Drawing.Size(1152, 292);
+            this.tabSquadStats.Size = new System.Drawing.Size(1152, 271);
             this.tabSquadStats.TabIndex = 0;
             this.tabSquadStats.Text = "Stats";
             this.tabSquadStats.UseVisualStyleBackColor = true;
@@ -2246,10 +2235,12 @@ namespace FreemanSaveEditor
             this.colIsHero,
             this.colName,
             this.colSex,
+            this.colHealth,
             this.colExp,
             this.colLevel,
             this.colMorale,
             this.colSightBonus,
+            this.colSpeed,
             this.colSmgPoint,
             this.colAssaultRiflePoint,
             this.colRiflePoint,
@@ -2267,10 +2258,12 @@ namespace FreemanSaveEditor
             this.dgvSquadStats.RowHeadersVisible = false;
             this.dgvSquadStats.RowHeadersWidth = 51;
             this.dgvSquadStats.RowTemplate.Height = 24;
-            this.dgvSquadStats.Size = new System.Drawing.Size(1146, 286);
+            this.dgvSquadStats.Size = new System.Drawing.Size(1146, 265);
             this.dgvSquadStats.TabIndex = 8;
             this.dgvSquadStats.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvSquadStats_CellMouseDown);
             this.dgvSquadStats.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvSquadStats_CellValidating);
+            this.dgvSquadStats.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvSquadStats_KeyPress);
+            this.dgvSquadStats.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvSquadStats_KeyUp);
             // 
             // colIsHero
             // 
@@ -2298,6 +2291,15 @@ namespace FreemanSaveEditor
             this.colSex.Name = "colSex";
             this.colSex.ReadOnly = true;
             this.colSex.Width = 60;
+            // 
+            // colHealth
+            // 
+            this.colHealth.DataPropertyName = "Health";
+            this.colHealth.HeaderText = "Health";
+            this.colHealth.MinimumWidth = 6;
+            this.colHealth.Name = "colHealth";
+            this.colHealth.ReadOnly = true;
+            this.colHealth.Width = 78;
             // 
             // colExp
             // 
@@ -2331,15 +2333,22 @@ namespace FreemanSaveEditor
             this.colSightBonus.Name = "colSightBonus";
             this.colSightBonus.Width = 109;
             // 
+            // colSpeed
+            // 
+            this.colSpeed.DataPropertyName = "Speed";
+            this.colSpeed.HeaderText = "Speed";
+            this.colSpeed.MinimumWidth = 6;
+            this.colSpeed.Name = "colSpeed";
+            this.colSpeed.ReadOnly = true;
+            this.colSpeed.Width = 78;
+            // 
             // colSmgPoint
             // 
             this.colSmgPoint.DataPropertyName = "SmgPoint";
             this.colSmgPoint.HeaderText = "Smg";
             this.colSmgPoint.MinimumWidth = 6;
             this.colSmgPoint.Name = "colSmgPoint";
-            this.colSmgPoint.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSmgPoint.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSmgPoint.Width = 42;
+            this.colSmgPoint.Width = 65;
             // 
             // colAssaultRiflePoint
             // 
@@ -2347,9 +2356,7 @@ namespace FreemanSaveEditor
             this.colAssaultRiflePoint.HeaderText = "AR";
             this.colAssaultRiflePoint.MinimumWidth = 6;
             this.colAssaultRiflePoint.Name = "colAssaultRiflePoint";
-            this.colAssaultRiflePoint.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colAssaultRiflePoint.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colAssaultRiflePoint.Width = 33;
+            this.colAssaultRiflePoint.Width = 56;
             // 
             // colRiflePoint
             // 
@@ -2493,7 +2500,7 @@ namespace FreemanSaveEditor
             this.tabSquadEquips.Location = new System.Drawing.Point(4, 25);
             this.tabSquadEquips.Name = "tabSquadEquips";
             this.tabSquadEquips.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSquadEquips.Size = new System.Drawing.Size(1152, 292);
+            this.tabSquadEquips.Size = new System.Drawing.Size(1152, 271);
             this.tabSquadEquips.TabIndex = 1;
             this.tabSquadEquips.Text = "Equips";
             this.tabSquadEquips.UseVisualStyleBackColor = true;
@@ -2529,7 +2536,7 @@ namespace FreemanSaveEditor
             this.dgvSquadEquips.RowHeadersVisible = false;
             this.dgvSquadEquips.RowHeadersWidth = 51;
             this.dgvSquadEquips.RowTemplate.Height = 24;
-            this.dgvSquadEquips.Size = new System.Drawing.Size(1146, 286);
+            this.dgvSquadEquips.Size = new System.Drawing.Size(1146, 265);
             this.dgvSquadEquips.TabIndex = 9;
             this.dgvSquadEquips.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSquadEquips_CellDoubleClick);
             this.dgvSquadEquips.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvSquadEquips_CellFormatting);
@@ -2773,6 +2780,81 @@ namespace FreemanSaveEditor
             this.menuSaveSetup.Text = "Save Unit Equip Setup";
             this.menuSaveSetup.Click += new System.EventHandler(this.MenuSaveSetup_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btAddAll);
+            this.panel1.Controls.Add(this.lbSquadSize);
+            this.panel1.Controls.Add(this.btEditSoldier);
+            this.panel1.Controls.Add(this.btToReserve);
+            this.panel1.Controls.Add(this.btDeleteSoldier);
+            this.panel1.Controls.Add(this.btAddSoldier);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1160, 46);
+            this.panel1.TabIndex = 16;
+            // 
+            // btAddAll
+            // 
+            this.btAddAll.Location = new System.Drawing.Point(520, 20);
+            this.btAddAll.Name = "btAddAll";
+            this.btAddAll.Size = new System.Drawing.Size(75, 23);
+            this.btAddAll.TabIndex = 15;
+            this.btAddAll.Text = "Add All";
+            this.btAddAll.UseVisualStyleBackColor = true;
+            this.btAddAll.Click += new System.EventHandler(this.BtAddAll_Click);
+            // 
+            // lbSquadSize
+            // 
+            this.lbSquadSize.AutoSize = true;
+            this.lbSquadSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbSquadSize.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lbSquadSize.Location = new System.Drawing.Point(19, 13);
+            this.lbSquadSize.Name = "lbSquadSize";
+            this.lbSquadSize.Size = new System.Drawing.Size(91, 18);
+            this.lbSquadSize.TabIndex = 14;
+            this.lbSquadSize.Text = "Squad Size: ";
+            // 
+            // btEditSoldier
+            // 
+            this.btEditSoldier.Location = new System.Drawing.Point(234, 22);
+            this.btEditSoldier.Name = "btEditSoldier";
+            this.btEditSoldier.Size = new System.Drawing.Size(75, 23);
+            this.btEditSoldier.TabIndex = 11;
+            this.btEditSoldier.Text = "Replace";
+            this.btEditSoldier.UseVisualStyleBackColor = true;
+            this.btEditSoldier.Click += new System.EventHandler(this.BtEditSoldier_Click);
+            // 
+            // btToReserve
+            // 
+            this.btToReserve.Location = new System.Drawing.Point(406, 22);
+            this.btToReserve.Name = "btToReserve";
+            this.btToReserve.Size = new System.Drawing.Size(100, 23);
+            this.btToReserve.TabIndex = 13;
+            this.btToReserve.Text = "To Reserves";
+            this.btToReserve.UseVisualStyleBackColor = true;
+            this.btToReserve.Click += new System.EventHandler(this.BtToReserve_Click);
+            // 
+            // btDeleteSoldier
+            // 
+            this.btDeleteSoldier.Location = new System.Drawing.Point(320, 22);
+            this.btDeleteSoldier.Name = "btDeleteSoldier";
+            this.btDeleteSoldier.Size = new System.Drawing.Size(75, 23);
+            this.btDeleteSoldier.TabIndex = 12;
+            this.btDeleteSoldier.Text = "Delete";
+            this.btDeleteSoldier.UseVisualStyleBackColor = true;
+            this.btDeleteSoldier.Click += new System.EventHandler(this.BtDeleteSoldier_Click);
+            // 
+            // btAddSoldier
+            // 
+            this.btAddSoldier.Location = new System.Drawing.Point(148, 22);
+            this.btAddSoldier.Name = "btAddSoldier";
+            this.btAddSoldier.Size = new System.Drawing.Size(75, 23);
+            this.btAddSoldier.TabIndex = 10;
+            this.btAddSoldier.Text = "Add";
+            this.btAddSoldier.UseVisualStyleBackColor = true;
+            this.btAddSoldier.Click += new System.EventHandler(this.BtAddSoldier_Click);
+            // 
             // lbPartySize
             // 
             this.lbPartySize.AutoSize = true;
@@ -2829,7 +2911,7 @@ namespace FreemanSaveEditor
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(226, 117);
+            this.label44.Location = new System.Drawing.Point(198, 116);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(162, 17);
             this.label44.TabIndex = 1;
@@ -2850,6 +2932,7 @@ namespace FreemanSaveEditor
             // 
             // tabInventory
             // 
+            this.tabInventory.Controls.Add(this.btGiveWoodIronTool);
             this.tabInventory.Controls.Add(this.label48);
             this.tabInventory.Controls.Add(this.dgvInventory);
             this.tabInventory.Location = new System.Drawing.Point(4, 25);
@@ -2858,6 +2941,19 @@ namespace FreemanSaveEditor
             this.tabInventory.TabIndex = 3;
             this.tabInventory.Text = "Inventory";
             this.tabInventory.UseVisualStyleBackColor = true;
+            // 
+            // btGiveWoodIronTool
+            // 
+            this.btGiveWoodIronTool.BackColor = System.Drawing.Color.White;
+            this.btGiveWoodIronTool.ForeColor = System.Drawing.Color.Green;
+            this.btGiveWoodIronTool.Location = new System.Drawing.Point(851, 67);
+            this.btGiveWoodIronTool.Name = "btGiveWoodIronTool";
+            this.btGiveWoodIronTool.Size = new System.Drawing.Size(106, 57);
+            this.btGiveWoodIronTool.TabIndex = 18;
+            this.btGiveWoodIronTool.Text = "Give Wood Tool Iron";
+            this.btGiveWoodIronTool.UseVisualStyleBackColor = false;
+            this.btGiveWoodIronTool.Visible = false;
+            this.btGiveWoodIronTool.Click += new System.EventHandler(this.BtGiveWoodIronTool_Click);
             // 
             // label48
             // 
@@ -2940,6 +3036,40 @@ namespace FreemanSaveEditor
             this.colInventory4.Name = "colInventory4";
             this.colInventory4.ReadOnly = true;
             // 
+            // menuInventory
+            // 
+            this.menuInventory.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.menuInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuInventory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectedSlotsToolStripMenuItem,
+            this.menuAddItem});
+            this.menuInventory.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.menuInventory.Name = "contextMenuStrip1";
+            this.menuInventory.ShowImageMargin = false;
+            this.menuInventory.Size = new System.Drawing.Size(216, 52);
+            // 
+            // selectedSlotsToolStripMenuItem
+            // 
+            this.selectedSlotsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuReplace});
+            this.selectedSlotsToolStripMenuItem.Name = "selectedSlotsToolStripMenuItem";
+            this.selectedSlotsToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
+            this.selectedSlotsToolStripMenuItem.Text = "Selected Slots";
+            // 
+            // menuReplace
+            // 
+            this.menuReplace.Name = "menuReplace";
+            this.menuReplace.Size = new System.Drawing.Size(138, 26);
+            this.menuReplace.Text = "Replace";
+            this.menuReplace.Click += new System.EventHandler(this.MenuReplace_Click);
+            // 
+            // menuAddItem
+            // 
+            this.menuAddItem.Name = "menuAddItem";
+            this.menuAddItem.Size = new System.Drawing.Size(215, 24);
+            this.menuAddItem.Text = "Add Item Into Empty Slots";
+            this.menuAddItem.Click += new System.EventHandler(this.MenuAddItem_Click);
+            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -3006,32 +3136,6 @@ namespace FreemanSaveEditor
             this.menuSaveList.ShowImageMargin = false;
             this.menuSaveList.Size = new System.Drawing.Size(36, 4);
             // 
-            // txtSaveLocation
-            // 
-            this.txtSaveLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSaveLocation.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FreemanSaveEditor.Properties.Settings.Default, "SaveLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtSaveLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtSaveLocation.Location = new System.Drawing.Point(105, 46);
-            this.txtSaveLocation.Name = "txtSaveLocation";
-            this.txtSaveLocation.Size = new System.Drawing.Size(830, 23);
-            this.txtSaveLocation.TabIndex = 6;
-            this.txtSaveLocation.Text = global::FreemanSaveEditor.Properties.Settings.Default.SaveLocation;
-            this.txtSaveLocation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtSaveLocation_MouseClick);
-            // 
-            // txtGameLocation
-            // 
-            this.txtGameLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGameLocation.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FreemanSaveEditor.Properties.Settings.Default, "GameLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtGameLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtGameLocation.Location = new System.Drawing.Point(105, 49);
-            this.txtGameLocation.Name = "txtGameLocation";
-            this.txtGameLocation.Size = new System.Drawing.Size(830, 23);
-            this.txtGameLocation.TabIndex = 4;
-            this.txtGameLocation.Text = global::FreemanSaveEditor.Properties.Settings.Default.GameLocation;
-            this.txtGameLocation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtGameLocation_MouseClick);
-            // 
             // tabMenu
             // 
             this.tabMenu.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
@@ -3075,6 +3179,19 @@ namespace FreemanSaveEditor
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Save Location";
             // 
+            // txtSaveLocation
+            // 
+            this.txtSaveLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSaveLocation.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FreemanSaveEditor.Properties.Settings.Default, "SaveLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtSaveLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtSaveLocation.Location = new System.Drawing.Point(105, 46);
+            this.txtSaveLocation.Name = "txtSaveLocation";
+            this.txtSaveLocation.Size = new System.Drawing.Size(830, 23);
+            this.txtSaveLocation.TabIndex = 6;
+            this.txtSaveLocation.Text = global::FreemanSaveEditor.Properties.Settings.Default.SaveLocation;
+            this.txtSaveLocation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtSaveLocation_MouseClick);
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -3088,6 +3205,19 @@ namespace FreemanSaveEditor
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Game Location";
+            // 
+            // txtGameLocation
+            // 
+            this.txtGameLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtGameLocation.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FreemanSaveEditor.Properties.Settings.Default, "GameLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtGameLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtGameLocation.Location = new System.Drawing.Point(105, 49);
+            this.txtGameLocation.Name = "txtGameLocation";
+            this.txtGameLocation.Size = new System.Drawing.Size(830, 23);
+            this.txtGameLocation.TabIndex = 4;
+            this.txtGameLocation.Text = global::FreemanSaveEditor.Properties.Settings.Default.GameLocation;
+            this.txtGameLocation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtGameLocation_MouseClick);
             // 
             // tabSaveFile
             // 
@@ -3103,27 +3233,30 @@ namespace FreemanSaveEditor
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.791096F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.2089F));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.btSave, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btCancel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btSaveAndContinue, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1168, 34);
             this.tableLayoutPanel1.TabIndex = 17;
             // 
             // btSave
             // 
             this.btSave.BackColor = System.Drawing.Color.White;
+            this.btSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btSave.ForeColor = System.Drawing.Color.Green;
-            this.btSave.Location = new System.Drawing.Point(94, 3);
+            this.btSave.Location = new System.Drawing.Point(119, 3);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(1071, 28);
+            this.btSave.Size = new System.Drawing.Size(811, 28);
             this.btSave.TabIndex = 1;
             this.btSave.Text = "Save";
             this.btSave.UseVisualStyleBackColor = false;
@@ -3132,16 +3265,31 @@ namespace FreemanSaveEditor
             // btCancel
             // 
             this.btCancel.BackColor = System.Drawing.Color.White;
+            this.btCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btCancel.ForeColor = System.Drawing.Color.Red;
             this.btCancel.Location = new System.Drawing.Point(3, 3);
             this.btCancel.MinimumSize = new System.Drawing.Size(84, 28);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(84, 28);
+            this.btCancel.Size = new System.Drawing.Size(110, 28);
             this.btCancel.TabIndex = 2;
             this.btCancel.Text = "< Cancel";
             this.btCancel.UseVisualStyleBackColor = false;
             this.btCancel.Click += new System.EventHandler(this.BtCancel_Click);
+            // 
+            // btSaveAndContinue
+            // 
+            this.btSaveAndContinue.BackColor = System.Drawing.Color.White;
+            this.btSaveAndContinue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btSaveAndContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btSaveAndContinue.ForeColor = System.Drawing.Color.Olive;
+            this.btSaveAndContinue.Location = new System.Drawing.Point(936, 3);
+            this.btSaveAndContinue.Name = "btSaveAndContinue";
+            this.btSaveAndContinue.Size = new System.Drawing.Size(229, 28);
+            this.btSaveAndContinue.TabIndex = 3;
+            this.btSaveAndContinue.Text = "Save && Continue";
+            this.btSaveAndContinue.UseVisualStyleBackColor = false;
+            this.btSaveAndContinue.Click += new System.EventHandler(this.BtSave_Click);
             // 
             // backgroundWorker1
             // 
@@ -3223,39 +3371,37 @@ namespace FreemanSaveEditor
             this.toolStripMenuItem12.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem12.Text = "Give Item (3. Slot)";
             // 
-            // menuInventory
+            // menuRestore
             // 
-            this.menuInventory.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.menuInventory.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuInventory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectedSlotsToolStripMenuItem,
-            this.menuAddItem});
-            this.menuInventory.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.menuInventory.Name = "contextMenuStrip1";
-            this.menuInventory.ShowImageMargin = false;
-            this.menuInventory.Size = new System.Drawing.Size(216, 52);
+            this.menuRestore.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.menuRestore.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuRestore.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem14});
+            this.menuRestore.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.menuRestore.Name = "contextMenuStrip1";
+            this.menuRestore.ShowImageMargin = false;
+            this.menuRestore.Size = new System.Drawing.Size(216, 52);
             // 
-            // selectedSlotsToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            this.selectedSlotsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuReplace});
-            this.selectedSlotsToolStripMenuItem.Name = "selectedSlotsToolStripMenuItem";
-            this.selectedSlotsToolStripMenuItem.Size = new System.Drawing.Size(215, 24);
-            this.selectedSlotsToolStripMenuItem.Text = "Selected Slots";
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem13});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(215, 24);
+            this.toolStripMenuItem1.Text = "Selected Slots";
             // 
-            // menuReplace
+            // toolStripMenuItem13
             // 
-            this.menuReplace.Name = "menuReplace";
-            this.menuReplace.Size = new System.Drawing.Size(224, 26);
-            this.menuReplace.Text = "Replace";
-            this.menuReplace.Click += new System.EventHandler(this.MenuReplace_Click);
+            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(138, 26);
+            this.toolStripMenuItem13.Text = "Replace";
             // 
-            // menuAddItem
+            // toolStripMenuItem14
             // 
-            this.menuAddItem.Name = "menuAddItem";
-            this.menuAddItem.Size = new System.Drawing.Size(215, 24);
-            this.menuAddItem.Text = "Add Item Into Empty Slots";
-            this.menuAddItem.Click += new System.EventHandler(this.MenuAddItem_Click);
+            this.toolStripMenuItem14.Name = "toolStripMenuItem14";
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(215, 24);
+            this.toolStripMenuItem14.Text = "Add Item Into Empty Slots";
             // 
             // FrmMain
             // 
@@ -3315,7 +3461,6 @@ namespace FreemanSaveEditor
             this.tabSquads.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.panSquad.ResumeLayout(false);
-            this.panSquad.PerformLayout();
             this.tabsSquadDetails.ResumeLayout(false);
             this.tabSquadStats.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSquadStats)).EndInit();
@@ -3323,9 +3468,12 @@ namespace FreemanSaveEditor
             this.tabSquadEquips.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSquadEquips)).EndInit();
             this.menuSquadEquips.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tabInventory.ResumeLayout(false);
             this.tabInventory.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).EndInit();
+            this.menuInventory.ResumeLayout(false);
             this.tabMenu.ResumeLayout(false);
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
@@ -3335,7 +3483,7 @@ namespace FreemanSaveEditor
             this.groupBox1.PerformLayout();
             this.tabSaveFile.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.menuInventory.ResumeLayout(false);
+            this.menuRestore.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3562,23 +3710,6 @@ namespace FreemanSaveEditor
         private Label lbSquadSize;
         private TableLayoutPanel tableLayoutPanel1;
         private Button btCancel;
-        private DataGridViewCheckBoxColumn colIsHero;
-        private DataGridViewTextBoxColumn colName;
-        private DataGridViewTextBoxColumn colSex;
-        private DataGridViewTextBoxColumn colExp;
-        private DataGridViewTextBoxColumn colLevel;
-        private DataGridViewTextBoxColumn colMorale;
-        private DataGridViewTextBoxColumn colSightBonus;
-        private DataGridViewTextBoxColumn colSmgPoint;
-        private DataGridViewTextBoxColumn colAssaultRiflePoint;
-        private DataGridViewTextBoxColumn colRiflePoint;
-        private DataGridViewTextBoxColumn colMachineGunPoint;
-        private DataGridViewTextBoxColumn colPistolPoint;
-        private DataGridViewTextBoxColumn colMarksmanship;
-        private DataGridViewTextBoxColumn colArmorPoint;
-        private DataGridViewTextBoxColumn colShotGunPoint;
-        private DataGridViewTextBoxColumn colLauncherPoint;
-        private DataGridViewTextBoxColumn colThrowingPoint;
         private DataGridViewCheckBoxColumn colIsHero2;
         private DataGridViewTextBoxColumn colName2;
         private DataGridViewTextBoxColumn colSex2;
@@ -3607,6 +3738,35 @@ namespace FreemanSaveEditor
         private ToolStripMenuItem selectedSlotsToolStripMenuItem;
         private ToolStripMenuItem menuReplace;
         private ToolStripMenuItem menuAddItem;
+        private Button btAddAll;
+        private Panel panel1;
+        private DataGridViewCheckBoxColumn colIsHero;
+        private DataGridViewTextBoxColumn colName;
+        private DataGridViewTextBoxColumn colSex;
+        private DataGridViewTextBoxColumn colHealth;
+        private DataGridViewTextBoxColumn colExp;
+        private DataGridViewTextBoxColumn colLevel;
+        private DataGridViewTextBoxColumn colMorale;
+        private DataGridViewTextBoxColumn colSightBonus;
+        private DataGridViewTextBoxColumn colSpeed;
+        private DataGridViewTextBoxColumn colSmgPoint;
+        private DataGridViewTextBoxColumn colAssaultRiflePoint;
+        private DataGridViewTextBoxColumn colRiflePoint;
+        private DataGridViewTextBoxColumn colMachineGunPoint;
+        private DataGridViewTextBoxColumn colPistolPoint;
+        private DataGridViewTextBoxColumn colMarksmanship;
+        private DataGridViewTextBoxColumn colArmorPoint;
+        private DataGridViewTextBoxColumn colShotGunPoint;
+        private DataGridViewTextBoxColumn colLauncherPoint;
+        private DataGridViewTextBoxColumn colThrowingPoint;
+        private Button btSaveAndContinue;
+        private Button btSaveSquadSetup;
+        private Button btRestoreSquad;
+        private ContextMenuStrip menuRestore;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem toolStripMenuItem13;
+        private ToolStripMenuItem toolStripMenuItem14;
+        private Button btGiveWoodIronTool;
     }
 }
 

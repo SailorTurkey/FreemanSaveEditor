@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using QuickType;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
@@ -209,6 +208,31 @@ namespace FreemanSaveEditor
             Program.ItemList = Item.FromJson(File.ReadAllText(Directory.GetFiles(Settings.Default.GameLocation, "Item.json", SearchOption.AllDirectories).First())).Values.ToList();
             Program.LocalizationList = Localization.FromJson(File.ReadAllText(Directory.GetFiles(Settings.Default.GameLocation, "Localization.json", SearchOption.AllDirectories).First()));
             Program.SolderList = Soldier.FromJson(File.ReadAllText(Directory.GetFiles(Settings.Default.GameLocation, "Soldier.json", SearchOption.AllDirectories).First())).Values.ToList();
+            Program.DesignChart = DesignChart.FromJson(File.ReadAllText(Directory.GetFiles(Settings.Default.GameLocation, "DesignChart.json", SearchOption.AllDirectories).First())).Values.ToList();
+
+            foreach (var design in Program.DesignChart)
+            {
+                var suffix = "-" + design.DesignType1.ToString()[0] + design.DesignType2.ToString()[0];
+
+                var baseWeapon = Program.WeaponList.Where(x => x.Id == design.WeaponId).First().DeepCopy();
+                var baseWeaponAsItem = Program.ItemList.Where(x => x.Id == design.WeaponId).First();
+
+                var modWeaponAsItem = Program.ItemList.Where(x => x.Id == design.Id).First();
+
+                modWeaponAsItem.Cost = baseWeaponAsItem.Cost + design.AddPrice;
+
+                //baseWeaponAsItem.Name += suffix;
+                //baseWeaponAsItem.Description = baseWeapon.Name + " Black Market Variant";
+                //baseWeaponAsItem.Id = design.Id;
+                baseWeapon.Id = design.Id;
+                baseWeapon.Name += suffix;
+
+                ModifyWeapon(baseWeapon, design.DesignType1, design.AddValue1);
+                ModifyWeapon(baseWeapon, design.DesignType2, design.AddValue2);
+
+                Program.WeaponList.Add(baseWeapon);
+                //Program.ItemList.Add(baseWeaponAsItem);
+            }
 
             Program.CurrentHelmets = (from i in Program.ItemList
                                       join c in Program.ShirtList on i.Id equals c.Id
@@ -326,7 +350,7 @@ namespace FreemanSaveEditor
                                           c.Interval,
                                           MarksmanReq = c.MarksmanshipRequirement,
                                           c.Spread
-                                      });
+                                      }).OrderBy(x => x.Name).ToList();
 
             Program.CurrentScopes = (from i in Program.ItemList
 
@@ -371,6 +395,47 @@ namespace FreemanSaveEditor
             dgvInventory.AutoGenerateColumns = false;
             dgvInventory.DataSource = Program.CurrentInventory;
             SetPartySize();
+        }
+
+        private void ModifyWeapon(Weapon baseWeapon, DesignType designType, decimal addValue)
+        {
+            switch (designType)
+            {
+                case DesignType.Accuracy:
+                    baseWeapon.Inaccuracy -= addValue;
+                    break;
+
+                case DesignType.Ammotype:
+                    baseWeapon.AmmoType = (long)addValue;
+                    break;
+
+                case DesignType.Bulletspeed:
+                    baseWeapon.BulletSpeed += (long)addValue;
+                    break;
+
+                case DesignType.Damage:
+                    baseWeapon.Damage += (long)addValue;
+                    break;
+
+                case DesignType.Empty:
+                    break;
+
+                case DesignType.Firerate:
+                    baseWeapon.Interval += addValue;
+                    break;
+
+                case DesignType.Magsize:
+                    baseWeapon.MagSize += (long)addValue;
+                    baseWeapon.PerReload += (long)addValue;
+                    break;
+
+                case DesignType.Shotnum:
+                    baseWeapon.ShotNum += (long)addValue;
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void SetPartySize()
@@ -614,13 +679,27 @@ namespace FreemanSaveEditor
             btSave.Enabled = false;
             SaveTabMain();
             SaveHeroes();
+            SaveInventory();
             SetAllSquadRanking();
-            loaded = false;
-            Squads.Remove(Squads.First(x => x.guid == new Guid()));
 
+            if ((sender as Button).Name != nameof(btSaveAndContinue))
+            {
+                loaded = false;
+                Squads.Remove(Squads.First(x => x.guid == new Guid()));
+            }
             btSave.Update();
 
-            backgroundWorker1.RunWorkerAsync();
+            backgroundWorker1.RunWorkerAsync((sender as Button).Name);
+        }
+
+        private void SaveInventory()
+        {
+            Program.CurrentPlayer.Items.Clear();
+
+            for (int i = 0; i < Program.CurrentInventory.Count; i++)
+            {
+                Program.CurrentPlayer.Items.AddRange(Program.CurrentInventory[i].GetItems());
+            }
         }
 
         private void BackgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -634,6 +713,7 @@ namespace FreemanSaveEditor
 
             File.WriteAllText(Path.Combine(Program.CurrentPath, "MapAgent.json"), player);
             File.WriteAllText(Path.Combine(Program.CurrentPath, "HeroAgent.json"), heroes);
+            e.Result = e.Argument;
         }
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -643,6 +723,11 @@ namespace FreemanSaveEditor
                 Application.DoEvents();
 
                 if (!btSave.IsDisposed) btSave.Enabled = true;
+
+                if (e.Result.ToString() == nameof(btSaveAndContinue))
+                {
+                    return;
+                }
 
                 BtCancel_Click(sender, e);
             });
@@ -848,7 +933,7 @@ namespace FreemanSaveEditor
                 FactionId = 1
             };
 
-            (dgvSquadStats.DataSource as BindingList<Prisoner>).Add(newSoldier);
+            (dgvSquadStats.DataSource as SortableBindingList<Prisoner>).Add(newSoldier);
         }
 
         private void OnSoldierReplace(object sender, EventArgs e)
@@ -1031,7 +1116,9 @@ namespace FreemanSaveEditor
             {
                 foreach (var unit in SelectedUnits)
                 {
-                    unit.Exp += Math.Min(expTotal, 1000000);
+                    if (unit.Level == 15) unit.Exp = 0;
+                    else
+                        unit.Exp = Math.Min(unit.Exp + expTotal, 1000000);
                 }
                 dgvSquadStats.Refresh();
             }
@@ -1047,7 +1134,9 @@ namespace FreemanSaveEditor
                 {
                     foreach (var soldier in squad.Soldiers)
                     {
-                        soldier.Exp += Math.Min(expTotal, 1000000);
+                        if (soldier.Level == 15) soldier.Exp = 0;
+                        else
+                            soldier.Exp = Math.Min(soldier.Exp + expTotal, 1000000);
                     }
                 }
                 dgvSquadStats.Refresh();
@@ -1072,7 +1161,7 @@ namespace FreemanSaveEditor
             }
         }
 
-        private BindingList<Prisoner> ActiveSquadData => ActiveSquadGrid.DataSource as BindingList<Prisoner>;
+        private SortableBindingList<Prisoner> ActiveSquadData => ActiveSquadGrid.DataSource as SortableBindingList<Prisoner>;
 
         private List<Prisoner> SelectedUnits
         {
@@ -1107,7 +1196,7 @@ namespace FreemanSaveEditor
             }
         }
 
-        private BindingList<Squad> Squads
+        private SortableBindingList<Squad> Squads
         {
             get
             {
@@ -1456,6 +1545,119 @@ namespace FreemanSaveEditor
         private void MenuReplace_Click(object sender, EventArgs e)
         {
             ShowInventorySelection(false);
+        }
+
+        private void dgvSquadStats_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void dgvSquadStats_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.C && ModifierKeys == Keys.Control)
+            {
+                MenuCopyUnit_Click(sender, e);
+            }
+            if (e.KeyCode == Keys.V && ModifierKeys == Keys.Control)
+            {
+                MenuPasteUnit_Click(sender, e);
+            }
+        }
+
+        private void BtAddAll_Click(object sender, EventArgs e)
+        {
+            if (cbSquads.SelectedIndex == 0)
+            {
+                Program.SolderList.OrderBy(x => x.Name).ToList().ForEach(x =>
+                {
+                    if (x.Id < 10000)
+                    {
+                        OnSoldierClick(new ToolStripMenuItem(x.Name)
+                        {
+                            Tag = x.Id
+                        }, new EventArgs());
+                    }
+                });
+            }
+        }
+
+        private void BtSaveSquadSetup_Click(object sender, EventArgs e)
+        {
+            if (cbSquads.SelectedIndex < 1) return;
+
+            var name = Interaction.InputBox("Enter new squad setup name", "Squad Setup Name", cbSquads.Text + " Squad Setup");
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                if (Settings.Default.SavedSquads == null)
+                    Settings.Default.SavedSquads = new System.Collections.Specialized.StringCollection();
+                Settings.Default.SavedSquads.Add(name + "||" + JsonConvert.SerializeObject((cbSquads.SelectedItem as Squad)));
+
+                Squads.Remove((cbSquads.SelectedItem as Squad));
+
+                cbSquads.DataSource = null;
+                cbSquads.DataSource = Squads;
+                dgvSquadEquips.DataSource = null;
+                dgvSquadStats.DataSource = null;
+                BtEdit_Click(sender, e);
+                Settings.Default.Save();
+            }
+        }
+
+        private void BtRestoreSquad_Click(object sender, EventArgs e)
+        {
+            menuRestore.Items.Clear();
+
+            if (Settings.Default.SavedSquads == null) return;
+
+            foreach (var setup in Settings.Default.SavedSquads)
+            {
+                var setupName = setup.Split(new string[] { "||" }, 2, StringSplitOptions.RemoveEmptyEntries)[0];
+                var setupUnit = setup.Split(new string[] { "||" }, 2, StringSplitOptions.RemoveEmptyEntries)[1];
+
+                menuRestore.Items.Add(new ToolStripMenuItem(setupName, null, OnSquadRestoreItemClicked) { Tag = setupUnit });
+            }
+
+            menuRestore.Show(btRestoreSquad, new Point(0, btRestoreSquad.Height));
+        }
+
+        private void OnSquadRestoreItemClicked(object sender, EventArgs e)
+        {
+            var setup = JsonConvert.DeserializeObject<Squad>((sender as ToolStripMenuItem).Tag.ToString());
+
+            Squads.Add(setup);
+
+            cbSquads.DataSource = null;
+            cbSquads.DataSource = Squads;
+            dgvSquadEquips.DataSource = null;
+            dgvSquadStats.DataSource = null;
+
+            cbSquads.SelectedIndex = cbSquads.Items.Count - 1;
+        }
+
+        private void BtGiveWoodIronTool_Click(object sender, EventArgs e)
+        {
+            //wood
+            for (int i = 0; i < 10; ++i)
+                for (int j = 0; j < InventoryRow.ColCount; j++)
+                {
+                    Program.CurrentInventory[i][j] = 42;
+                }
+
+            //iron
+            for (int i = 10; i < 20; ++i)
+                for (int j = 0; j < InventoryRow.ColCount; j++)
+                {
+                    Program.CurrentInventory[i][j] = 22;
+                }
+
+            //tool
+            for (int i = 20; i < Program.CurrentInventory.Count; ++i)
+                for (int j = 0; j < InventoryRow.ColCount; j++)
+                {
+                    Program.CurrentInventory[i][j] = 36;
+                }
+
+            dgvInventory.Refresh();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace FreemanSaveEditor
         public static List<Soldier> SolderList { get; internal set; }
         public static Hero CurrentHeroes { get; internal set; }
         public static List<InventoryRow> CurrentInventory { get; internal set; }
+        public static List<DesignChart> DesignChart { get; internal set; }
 
         /// <summary>
         /// The main entry point for the application.
